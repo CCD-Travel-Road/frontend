@@ -1,0 +1,41 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "overrides": [],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint","prettier"],
+  "extends": ["airbnb", "plugin:@typescript-eslint/recommended", "airbnb-typescript", "prettier"],
+  "rules": {
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": "off", // package.json에 없는 패키지를 import할 때 에러 무시
+    "arrow-parens": ["error", "always"],
+    "object-curly-newline": "off",
+    "import/extensions": "off", //이상한 확장자 오류 꺼버림
+    "consistent-return": "off",
+    "no-useless-escape":"off",
+    "no-console":"off",
+    "react/button-has-type":"off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/naming-convention": "warn",
+    "react/jsx-props-no-spreading": "off",
+    "react/function-component-definition": "off",
+    "react/require-default-props": "off"
+  },
+  "ignorePatterns": ["./tsconfig.json", ".eslintrc"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "extensions": [".js", ".ts", ".d.ts", ".tsx"]
+      }
+    }
+  }
+}
