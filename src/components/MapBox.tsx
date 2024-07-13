@@ -35,7 +35,7 @@ const MapBox = () => {
             const container = document.getElementById('map');
             if (container && window.kakao && window.kakao.maps) {
                 const options = {
-                    center: new window.kakao.maps.LatLng(33.450701, 126.570667),
+                    center: new window.kakao.maps.LatLng(37.517223, 127.041292),
                     level: 3,
                 };
 
