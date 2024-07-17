@@ -7,7 +7,7 @@ export const EntireContainer = styled.div`
 // 메인페이지 배너
 export const BannerFrame = styled.div`
     width: 100%;
-    padding:12px 20px 0px 20px;
+    padding:12px 20px 8px 20px;
     
     display:flex;
     align-items:center;
@@ -55,7 +55,7 @@ export const BannerFrame = styled.div`
 // 콘텐츠
 export const ContentFrame = styled.div`
         width:100%;
+        height:500px;
         padding:32px 20px 0px 20px;
-        height:auto;
         background-color:#F9F9F9;
     `
