@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import NavigationItem from "./NavigationItem";
 
@@ -27,15 +28,35 @@ const Wrapper = styled.div`
     gap:20px;
 `
 
+const ClickFrame = styled.div`
+    width:25%;
+`
+
 function Navigation() {
+
+    const nav = useNavigate();
 
     return (
 
         <Wrapper>
-            <NavigationItem title="홈" icon={homeActive}/>
-            <NavigationItem title="여행 조회" icon={viewInActive}/>
-            <NavigationItem title="여행 제작" icon={createInActive}/>
-            <NavigationItem title="커뮤니티" icon={communityInActive}/>
+
+            <ClickFrame onClick={() => {nav('/')}}>
+                <NavigationItem title="홈" icon={homeActive}/>
+            </ClickFrame>
+
+            <ClickFrame onClick={() => {nav('/')}}>
+                <NavigationItem title="여행 조회" icon={viewInActive}/>
+            </ClickFrame>
+            
+            <ClickFrame onClick={() => {nav('/setDate')}}>
+                <NavigationItem title="여행 제작" icon={createInActive}/>
+            </ClickFrame>
+
+
+            <ClickFrame onClick={() => {nav('/')}}>
+                <NavigationItem title="커뮤니티" icon={communityInActive}/>
+            </ClickFrame>
+            
         </Wrapper>
     )
 

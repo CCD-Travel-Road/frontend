@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate  } from "react-router-dom";
 
 // components
 import Navigation from "src/components/Navigation/Navigation";
@@ -11,6 +12,8 @@ import * as T from './Styles';
 import bannerElementA from "../../images/mainPage/main-banner-elementA.png"
 
 function MainPage() {
+
+    const nav = useNavigate();
 
     return (
 
@@ -25,7 +28,7 @@ function MainPage() {
                     <T.Title>안녕하세요 김희찬님</T.Title>
                     <T.SubTitle>새로운 여행을 떠나보세요!</T.SubTitle>
 
-                    <T.UserInteractionBtn>
+                    <T.UserInteractionBtn onClick={() => {nav('/setDate')}}>
                         <T.BtnText>여행 만들기</T.BtnText>
                     </T.UserInteractionBtn>
                 </T.UserTextFrame>
