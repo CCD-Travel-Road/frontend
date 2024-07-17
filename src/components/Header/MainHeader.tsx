@@ -12,9 +12,6 @@ const Wrapper = styled.div`
 
     padding:16px 20px;
     background-color:white;
-
-    position:fixed;
-    top:0;
 `
 
 const Logo = styled.p`
