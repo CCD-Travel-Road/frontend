@@ -21,7 +21,7 @@ const NavIcon = styled.img`
     object-fit:cover;
 `
 
-const NavTitle = styled.p`
+const NavTitle = styled.p`  
     font-size:12px;
     
 `
