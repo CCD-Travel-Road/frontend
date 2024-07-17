@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import NavigationItem from "./NavigationItem";
 
 // image
 import homeActive from "../../images/home_active.png"
-// import homeInActive from "../../images/home_inactive.png"
-// import viewActive from "../../images/view_active.png"
+import homeInActive from "../../images/home_inactive.png"
+import viewActive from "../../images/view_active.png"
 import viewInActive from "../../images/view_inactive.png"
-// import createActive from "../../images/create_active.png"
+import createActive from "../../images/create_active.png"
 import createInActive from "../../images/create_inactive.png"
-// import communityActive from "../../images/community_active.png"
+import communityActive from "../../images/community_active.png"
 import communityInActive from "../../images/community_inactive.png"
 
 // styled
@@ -35,26 +35,30 @@ const ClickFrame = styled.div`
 function Navigation() {
 
     const nav = useNavigate();
+    const location = useLocation();
 
     return (
 
         <Wrapper>
 
             <ClickFrame onClick={() => {nav('/')}}>
-                <NavigationItem title="홈" icon={homeActive}/>
+                <NavigationItem title="홈" icon={location.pathname === '/' ? homeActive : homeInActive} 
+                                active={location.pathname === "/"}/>
             </ClickFrame>
 
-            <ClickFrame onClick={() => {nav('/')}}>
-                <NavigationItem title="여행 조회" icon={viewInActive}/>
+            <ClickFrame onClick={() => {nav('/view')}}>
+                <NavigationItem title="여행 조회" icon={location.pathname === '/view' ? viewActive : viewInActive}
+                                active={location.pathname === "/view"} />
             </ClickFrame>
             
             <ClickFrame onClick={() => {nav('/setDate')}}>
-                <NavigationItem title="여행 제작" icon={createInActive}/>
+                <NavigationItem title="여행 제작" icon={location.pathname === '/setDate' ? createActive : createInActive} 
+                                active={location.pathname === "/setDate"}/>
             </ClickFrame>
 
-
-            <ClickFrame onClick={() => {nav('/')}}>
-                <NavigationItem title="커뮤니티" icon={communityInActive}/>
+            <ClickFrame onClick={() => {nav('/community')}}>
+                <NavigationItem title="커뮤니티" icon={location.pathname === '/community' ? communityActive : communityInActive}
+                                active={location.pathname === "/community"}/>
             </ClickFrame>
             
         </Wrapper>
