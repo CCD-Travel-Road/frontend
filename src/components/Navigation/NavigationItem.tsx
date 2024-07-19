@@ -26,15 +26,6 @@ const NavTitle = styled.p`
 `
 
 function NavigationItem(props) {
-<<<<<<< Updated upstream
-    
-    const { icon, title, active } = props;
-
-    return (
-
-        <Wrapper active={active}>
-            <NavIcon src={icon}/>
-=======
 
     const { icon, title, active } = props;
 
@@ -42,7 +33,6 @@ function NavigationItem(props) {
 
         <Wrapper active={active}>
             <NavIcon src={icon} />
->>>>>>> Stashed changes
             <NavTitle>{title}</NavTitle>
         </Wrapper>
     )

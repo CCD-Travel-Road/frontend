@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 // components
@@ -18,7 +17,7 @@ function MainPage() {
     return (
 
         <T.EntireContainer>
-            <MainHeader/>
+            <MainHeader />
 
             {/* 메인페이지 배너 */}
             <T.BannerFrame>
@@ -28,7 +27,7 @@ function MainPage() {
                     <T.Title>안녕하세요 김희찬님</T.Title>
                     <T.SubTitle>새로운 여행을 떠나보세요!</T.SubTitle>
 
-                    <T.UserInteractionBtn onClick={() => {nav('/setDate')}}>
+                    <T.UserInteractionBtn onClick={() => { nav('/setDate') }}>
                         <T.BtnText>여행 만들기</T.BtnText>
                     </T.UserInteractionBtn>
                 </T.UserTextFrame>
@@ -40,11 +39,11 @@ function MainPage() {
 
             {/* 콘텐츠 */}
             <T.ContentFrame>
-                <MainTitle content="요즘 인기많은 여행 코스에요."/>
+                <MainTitle content="요즘 인기많은 여행 코스에요." />
             </T.ContentFrame>
-            
 
-            <Navigation/>
+
+            <Navigation />
         </T.EntireContainer>
 
     );

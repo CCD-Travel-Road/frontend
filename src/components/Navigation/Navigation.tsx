@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
-
 import NavigationItem from "./NavigationItem";
 
 // image
@@ -39,10 +38,10 @@ function Navigation() {
     return (
 
         <Wrapper>
-            <NavigationItem title="홈" icon={homeActive}/>
-            <NavigationItem title="여행 조회" icon={viewInActive}/>
-            <NavigationItem title="여행 제작" icon={createInActive}/>
-            <NavigationItem title="커뮤니티" icon={communityInActive}/>
+            <NavigationItem title="홈" icon={homeActive} />
+            <NavigationItem title="여행 조회" icon={viewInActive} />
+            <NavigationItem title="여행 제작" icon={createInActive} />
+            <NavigationItem title="커뮤니티" icon={communityInActive} />
 
 
             <ClickFrame onClick={() => { nav('/') }}>
