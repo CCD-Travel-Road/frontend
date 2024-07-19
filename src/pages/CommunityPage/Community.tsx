@@ -9,8 +9,8 @@ function ViewJourney() {
 
         <T.EntireContainer>
 
+        <Navigation />
 
-            <Navigation />
         </T.EntireContainer>
 
     );

@@ -27,10 +27,10 @@ function HeaderUtil() {
 
         <Wrapper>
 
-            <UtilIcon src={bookmark} />
-            <UtilIcon src={alert} />
-            <UtilIcon src={mypage} />
-
+            <UtilIcon src={bookmark}/>
+            <UtilIcon src={alert}/>
+            <UtilIcon src={mypage}/>
+            
         </Wrapper>
     )
 

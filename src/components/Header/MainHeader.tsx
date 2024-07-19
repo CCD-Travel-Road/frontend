@@ -27,7 +27,8 @@ function MainHeader() {
         <Wrapper>
 
             <Logo>YEORO</Logo>
-            <HeaderUtil />
+
+            <HeaderUtil/>
 
         </Wrapper>
     )
