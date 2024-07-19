@@ -27,7 +27,20 @@
     "@typescript-eslint/naming-convention": "warn",
     "react/jsx-props-no-spreading": "off",
     "react/function-component-definition": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "react",
+            "importNames": ["default"],
+            "message": "import React from 'react'는 react 17부터 더 이상 필요하지 않습니다. 필요한 것만 react로부터 import해서 사용해주세요."
+          }
+        ]
+      }
+    ],
+    "react/react-in-jsx-scope": "off"
   },
   "ignorePatterns": ["./tsconfig.json", ".eslintrc"],
   "settings": {
