@@ -1,5 +1,5 @@
-import React from "react";
-import { useNavigate  } from "react-router-dom";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 // components
 import Navigation from "src/components/Navigation/Navigation";

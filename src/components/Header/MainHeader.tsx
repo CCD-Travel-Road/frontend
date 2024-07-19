@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 import HeaderUtil from "./HeaderUtil";
@@ -28,6 +27,7 @@ function MainHeader() {
         <Wrapper>
 
             <Logo>YEORO</Logo>
+
             <HeaderUtil/>
 
         </Wrapper>
