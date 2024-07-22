@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import styled from 'styled-components';
+import { dateRangeState } from '../recoil/atoms'
+import { colors } from '../styles/GlobalStyles';
 
 function ScrollableCalendar() {
     const [selectionRange, setSelectionRange] = useState({
@@ -12,6 +15,10 @@ function ScrollableCalendar() {
         endDate: new Date(),
         key: 'selection',
     });
+
+    const [isButtonVisible, setIsButtonVisible] = useState(false);
+    const [, setDateRange] = useRecoilState(dateRangeState);
+
 
     const handleSelect = (ranges) => {
         const { selection } = ranges;
@@ -21,6 +28,16 @@ function ScrollableCalendar() {
         const startDate = format(selection.startDate, 'yyyy-MM-dd');
         const endDate = format(selection.endDate, 'yyyy-MM-dd');
         console.log(`StartDate: ${startDate}, EndDate: ${endDate}`);
+
+        console.log('Setting button visible');
+        setIsButtonVisible(true);
+    };
+
+    const handleNextButtonClick = () => {
+        setDateRange({
+            startDate: selectionRange.startDate,
+            endDate: selectionRange.endDate,
+        });
     };
 
     return (
@@ -44,6 +61,9 @@ function ScrollableCalendar() {
                 }}
                 locale={ko}
             />
+            {isButtonVisible && (
+                <NextButton onClick={handleNextButtonClick}>다음으로</NextButton>
+            )}
         </CalendarWrapper>
     );
 }
@@ -96,4 +116,20 @@ const StyledDateRangePicker = styled(DateRangePicker)`
     .rdrDay--endOfMonth {
         margin: 5px 0; 
     }
+`;
+
+const NextButton = styled.button`
+    position: fixed;
+    width: 80%;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: ${colors.mainColor};
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 1000;
 `;

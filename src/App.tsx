@@ -1,6 +1,7 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
+import { GlobalStyles } from './styles/GlobalStyles';
 import MapPage from './pages/MapPage';
 import MainPage from './pages/MainPage/MainPage';
 import ASetDate from './pages/CreateJourneyPage/ASetDate';
@@ -12,6 +13,7 @@ import Community from './pages/CommunityPage/Community'
 function App() {
   return (
     <RecoilRoot>
+      <GlobalStyles />
       <Routes>
         <Route path="/Map" element={<MapPage />} />
         <Route path="/" element={<MainPage />} />
