@@ -35,6 +35,8 @@ function Navigation() {
     const nav = useNavigate();
     const location = useLocation();
 
+    const isTravelCreationActive = location.pathname.startsWith('/setDate') || location.pathname.startsWith('/setType');
+
     return (
 
         <Wrapper>
@@ -50,8 +52,8 @@ function Navigation() {
             </ClickFrame>
 
             <ClickFrame onClick={() => { nav('/setDate') }}>
-                <NavigationItem title="여행 제작" icon={location.pathname === '/setDate' ? createActive : createInActive}
-                    active={location.pathname === "/setDate"} />
+                <NavigationItem title="여행 제작" icon={isTravelCreationActive ? createActive : createInActive}
+                    active={isTravelCreationActive} />
             </ClickFrame>
 
             <ClickFrame onClick={() => { nav('/community') }}>

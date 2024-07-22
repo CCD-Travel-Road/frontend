@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
@@ -18,7 +19,7 @@ function ScrollableCalendar() {
 
     const [isButtonVisible, setIsButtonVisible] = useState(false);
     const [, setDateRange] = useRecoilState(dateRangeState);
-
+    const navigate = useNavigate();
 
     const handleSelect = (ranges) => {
         const { selection } = ranges;
@@ -29,7 +30,6 @@ function ScrollableCalendar() {
         const endDate = format(selection.endDate, 'yyyy-MM-dd');
         console.log(`StartDate: ${startDate}, EndDate: ${endDate}`);
 
-        console.log('Setting button visible');
         setIsButtonVisible(true);
     };
 
@@ -38,6 +38,7 @@ function ScrollableCalendar() {
             startDate: selectionRange.startDate,
             endDate: selectionRange.endDate,
         });
+        navigate('/setType');
     };
 
     return (
@@ -60,6 +61,7 @@ function ScrollableCalendar() {
                     calendarHeight: 600, // 달력 전체의 높이 설정
                 }}
                 locale={ko}
+                color={colors.mainColor}
             />
             {isButtonVisible && (
                 <NextButton onClick={handleNextButtonClick}>다음으로</NextButton>
@@ -88,11 +90,13 @@ const CalendarWrapper = styled.div`
 const StyledDateRangePicker = styled(DateRangePicker)`
     width: 100%;
     height: auto;
+    color: ${colors.mainColor};
 
     /* 내부 클래스 스타일링 */
     .rdrCalendarWrapper, .rdrDateRangeWrapper, .rdrMonth {
         width: 100%;
         height: auto; 
+        
     }
 
     .rdrCalendarWrapper {
@@ -103,19 +107,22 @@ const StyledDateRangePicker = styled(DateRangePicker)`
     .rdrDateRangeWrapper {
         width: 100%;
         height: auto; /* 필요에 따라 설정 */
+        
     }
     
     .rdrDay {
         margin: 5px 0; 
     }
 
-    .rdrDay--inRange, .rdrDay--selected {
-        margin: 5px 0; 
+    .rdrDay--inRange, .rdrDay--selected, .rdrInRange, .rdrStartEdge, .rdrEndEdge {
+        background-color: ${colors.mainColor} !important;
+        color: white !important;
     }
 
     .rdrDay--endOfMonth {
         margin: 5px 0; 
     }
+
 `;
 
 const NextButton = styled.button`

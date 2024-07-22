@@ -5,7 +5,7 @@ import { GlobalStyles } from './styles/GlobalStyles';
 import MapPage from './pages/MapPage';
 import MainPage from './pages/MainPage/MainPage';
 import ASetDate from './pages/CreateJourneyPage/ASetDate';
-
+import TypeSelect from './pages/CreateJourneyPage/TypeSelectPage';
 import ViewJourney from './pages/ViewJourneyPage/ViewJourney';
 
 import Community from './pages/CommunityPage/Community'
@@ -20,6 +20,7 @@ function App() {
         <Route path="/setDate" element={<ASetDate />} />
         <Route path="/view" element={<ViewJourney />} />
         <Route path="/community" element={<Community />} />
+        <Route path="/setType" element={<TypeSelect />} />
       </Routes>
     </RecoilRoot>
   );
