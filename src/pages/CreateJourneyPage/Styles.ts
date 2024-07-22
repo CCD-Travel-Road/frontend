@@ -7,8 +7,7 @@ export const EntireContainer = styled.div`
 // 콘텐츠
 export const TitleFrame = styled.div`
     width: 100%;
-    height: 10%;
-    padding: 20px 20px;
+    padding: 20px;
     z-index: 2;
     background-color: #fff;
     position: fixed;
@@ -19,7 +18,6 @@ export const TitleFrame = styled.div`
 export const ContentFrame = styled.div`
     width: 100%;
     height: 100%; 
-    padding-top: 18%;
-    overflow-y: auto; 
-    background-color: #F9F9F9;
+    padding-top:95px; // TitleFrame의 높이값
+    overflow-y: auto;
 `;

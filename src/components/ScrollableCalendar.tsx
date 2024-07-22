@@ -10,6 +10,8 @@ import styled from 'styled-components';
 import { dateRangeState } from '../recoil/atoms'
 import { colors } from '../styles/GlobalStyles';
 
+import FuncButton from './Button/FuncButton';
+
 function ScrollableCalendar() {
     const [selectionRange, setSelectionRange] = useState({
         startDate: new Date(),
@@ -55,16 +57,20 @@ function ScrollableCalendar() {
                 renderStaticRangeLabel={() => ''} // 사용자 정의 레이블 렌더링
                 scroll={{
                     enabled: true, // 무한 스크롤 활성화
-                    monthHeight: 300, // 각 달의 높이 설정
-                    longMonthHeight: 350, // 긴 달의 높이 설정 (일수 차이로 인해)
+                    monthHeight: 400, // 각 달의 높이 설정
+                    longMonthHeight: 400, // 긴 달의 높이 설정 (일수 차이로 인해)
                     calendarWidth: 800, // 달력 전체의 너비 설정
                     calendarHeight: 600, // 달력 전체의 높이 설정
                 }}
                 locale={ko}
                 color={colors.mainColor}
             />
-            {isButtonVisible && (
-                <NextButton onClick={handleNextButtonClick}>다음으로</NextButton>
+            {isButtonVisible && (  
+                
+                <ButtonFrame onClick={handleNextButtonClick }>
+                    <FuncButton text="다음으로"/>
+                </ButtonFrame>
+                
             )}
         </CalendarWrapper>
     );
@@ -75,9 +81,6 @@ export default ScrollableCalendar;
 const CalendarWrapper = styled.div`
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     overflow: hidden;
     box-sizing: border-box;
     position: relative;
@@ -107,16 +110,43 @@ const StyledDateRangePicker = styled(DateRangePicker)`
     .rdrDateRangeWrapper {
         width: 100%;
         height: auto; /* 필요에 따라 설정 */
-        
+        background-color:#f9f9f9;
+    }
+    
+    .rdrDateDisplayWrapper {
+        background-color:#f9f9f9;
+    }
+
+    /* 일별 스타일링 */
+    .rdrDays {
+        justify-content:space-between;
     }
     
     .rdrDay {
-        margin: 5px 0; 
+        margin: 4px 0px;
+        width:calc(100% / 7);
+        height:51px; 
     }
 
-    .rdrDay--inRange, .rdrDay--selected, .rdrInRange, .rdrStartEdge, .rdrEndEdge {
+    .rdrDayNumber {
+        position:static;
+        width:100%;
+        height:100%;
+    }
+
+    .rdrDayNumber span {
+        z-index:99;
+    }
+
+    .rdrDay--inRange, .rdrDay--selected,
+    .rdrInRange, .rdrStartEdge, .rdrEndEdge {
         background-color: ${colors.mainColor} !important;
         color: white !important;
+
+        top:0px;
+        bottom:0px;
+        right:0px;
+        left:0px;
     }
 
     .rdrDay--endOfMonth {
@@ -125,18 +155,6 @@ const StyledDateRangePicker = styled(DateRangePicker)`
 
 `;
 
-const NextButton = styled.button`
-    position: fixed;
-    width: 80%;
-    bottom: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px 20px;
-    background-color: ${colors.mainColor};
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    z-index: 1000;
-`;
+const ButtonFrame = styled.div`
+    width:100%;
+`
