@@ -4,7 +4,7 @@ import MainTitle from "src/components/MainTitle";
 import ScrollableCalendar from "src/components/ScrollableCalendar";
 import CancleText from "src/components/CancleText";
 
-import * as T from './Styles';
+import * as T from './AStyles';
 
 function ASetDate() {
 

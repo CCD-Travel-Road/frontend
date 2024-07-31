@@ -4,8 +4,8 @@ import { RecoilRoot } from 'recoil';
 import { GlobalStyles } from './styles/GlobalStyles';
 import MapPage from './pages/MapPage';
 import MainPage from './pages/MainPage/MainPage';
-import ASetDate from './pages/CreateJourneyPage/ASetDate';
-import TypeSelect from './pages/CreateJourneyPage/TypeSelectPage';
+import ASetDate from './pages/CreateJourneyPage/ADateSelectPage';
+import TypeSelect from './pages/CreateJourneyPage/BTypeSelectPage';
 import ViewJourney from './pages/ViewJourneyPage/ViewJourney';
 
 import Community from './pages/CommunityPage/Community'
