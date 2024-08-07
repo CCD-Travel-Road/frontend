@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
@@ -10,6 +11,7 @@ import { dateRangeState } from '../recoil/atoms'
 import { colors } from '../styles/GlobalStyles';
 
 function ScrollableCalendar() {
+    const navigate = useNavigate();
     const [selectionRange, setSelectionRange] = useState({
         startDate: new Date(),
         endDate: new Date(),
@@ -38,6 +40,7 @@ function ScrollableCalendar() {
             startDate: selectionRange.startDate,
             endDate: selectionRange.endDate,
         });
+        navigate('/map');
     };
 
     return (
