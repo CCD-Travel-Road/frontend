@@ -1,19 +1,21 @@
 // components
 import Navigation from "src/components/Navigation/Navigation";
+import FunctionHeader from "src/components/Header/FunctionHeader";
 import * as T from "./Styles"
 
 
-function ViewJourney() {
+function Community() {
 
     return (
 
         <T.EntireContainer>
 
-        <Navigation />
+            <FunctionHeader content="여행 조회"/>
+            <Navigation />
 
         </T.EntireContainer>
 
     );
 }
 
-export default ViewJourney;
+export default Community;

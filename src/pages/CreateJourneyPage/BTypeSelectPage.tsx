@@ -4,7 +4,7 @@ import MainTitle from "src/components/MainTitle";
 import CancleText from "src/components/CancleText";
 
 import QestionTitle from "./CreateJourneyCompnent/QestionTItle";
-import AnswerButton from "./CreateJourneyCompnent/AnswerButton";
+// import AnswerButton from "./CreateJourneyCompnent/AnswerButton";
 
 import * as T from './BStyles';
 
@@ -27,14 +27,14 @@ function ASetDate() {
 
             <T.ContentFrame>
                 <QestionTitle content="🤔 누구랑 가시나요?" />
-                <T.AnswerFrame>
+                {/* <T.AnswerFrame>
                     <AnswerButton value="친구"/>
                     <AnswerButton value="가족"/>
                     <AnswerButton value="회사동료"/>
                     <AnswerButton value="지인"/>
                     <AnswerButton value="기타"/>
                     <AnswerButton value="모르겠어요"/>
-                </T.AnswerFrame>
+                </T.AnswerFrame> */}
                 
             </T.ContentFrame>
 
