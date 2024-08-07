@@ -1,42 +1,53 @@
-import styled from "styled-components";
-import PropTypes from 'prop-types';
+// import { useState } from "react";
+// import styled from "styled-components";
+// import PropTypes from 'prop-types';
 
-const Wrapper = styled.div`
-    width:fit-content;
+// const Wrapper = styled.div`
+//     width:fit-content;
 
-    background-color:white;
-    padding:8px 24px;
-    border-radius:40px;
-    margin-right: 12px;
-    margin-bottom: 12px;
+//     background-color:white;
+//     padding:8px 24px;
+//     border-radius:40px;
+//     margin-right: 12px;
+//     margin-bottom: 12px;
 
-    &:last-child {
-        margin-right: 0;
-    }
-`
+//     &:last-child {
+//         margin-right: 0;
+//     }
+// `
 
-const Answer = styled.p`
-    font-size:12px;
-    font-weight:400;
+// const Answer = styled.p`
+//     font-size:12px;
+//     font-weight:400;
 
-    color:var(--textColor);
-`
+//     color:var(--textColor);
+// `
 
-function AnswerButton(props) {
+// function AnswerButton(props) {
 
-    const { value } = props;
+//     const [isActive, SetisActive] = useState(false);
+//     const [value, SetValue] = useState('');
 
-    return (
+//     const ClickAnswerButton = () => {
+
+//         SetisActive(true)
+//         console.log(isActive)
+
+//     }
+
+//     const { value } = props;
+
+//     return (
         
-        <Wrapper>
-            <Answer>{value}</Answer>
-        </Wrapper>
+//         <Wrapper onClick={ClickAnswerButton}>
+//             <Answer>{value}</Answer>
+//         </Wrapper>
         
-    )
-}
+//     )
+// }
 
-AnswerButton.propTypes = {
-    value: PropTypes.string.isRequired,
-};
+// AnswerButton.propTypes = {
+//     value: PropTypes.string.isRequired,
+// };
 
-export default AnswerButton;
+// export default AnswerButton;
