@@ -1,53 +1,80 @@
-// import { useState } from "react";
-// import styled from "styled-components";
-// import PropTypes from 'prop-types';
+import { useState } from "react";
+import styled from "styled-components";
+import PropTypes from 'prop-types';
 
-// const Wrapper = styled.div`
-//     width:fit-content;
+const Wrapper = styled.div`
+    width:fit-content;
 
-//     background-color:white;
-//     padding:8px 24px;
-//     border-radius:40px;
-//     margin-right: 12px;
-//     margin-bottom: 12px;
+    background-color:white;
+    padding:12px 24px;
+    border-radius:40px;
+    margin-right: 12px;
+    margin-bottom: 12px;
+`
 
-//     &:last-child {
-//         margin-right: 0;
-//     }
-// `
+const AcitveWrapper = styled.div`
+    width:fit-content;
 
-// const Answer = styled.p`
-//     font-size:12px;
-//     font-weight:400;
+    background-color:var(--brandColor);
+    padding:12px 24px;
+    border-radius:40px;
+    margin-right: 12px;
+    margin-bottom: 12px;
+`
 
-//     color:var(--textColor);
-// `
+const Answer = styled.p`
+    font-size:12px;
+    font-weight:400;
 
-// function AnswerButton(props) {
+    color:var(--textColor);
+`
 
-//     const [isActive, SetisActive] = useState(false);
-//     const [value, SetValue] = useState('');
+const AcitveAnswer = styled.p`
+    font-size:12px;
+    font-weight:400;
 
-//     const ClickAnswerButton = () => {
+    color:white;
+    background-color:var(--brandColor);
+`
 
-//         SetisActive(true)
-//         console.log(isActive)
+function AnswerButton(props) {
 
-//     }
+    const [isActive, SetisActive] = useState(false);
 
-//     const { value } = props;
+    const ClickAnswerButton = () => {
 
-//     return (
+        if (isActive === false) {
+            SetisActive(true)
+        } else SetisActive(false)
         
-//         <Wrapper onClick={ClickAnswerButton}>
-//             <Answer>{value}</Answer>
-//         </Wrapper>
+        console.log(isActive)
+
+    }
+
+    const { contents } = props;
+
+    return (
+
+        <div>
+            {
+                isActive === false 
+                    
+                    ? 
+                    <Wrapper onClick={ClickAnswerButton}>
+                        <Answer>{contents}</Answer>
+                    </Wrapper> 
+                    : <AcitveWrapper onClick={ClickAnswerButton}>
+                        <AcitveAnswer>{contents}</AcitveAnswer>
+                    </AcitveWrapper>
+
+            }
+        </div>
         
-//     )
-// }
+    )
+}
 
-// AnswerButton.propTypes = {
-//     value: PropTypes.string.isRequired,
-// };
+AnswerButton.propTypes = {
+    contents: PropTypes.string.isRequired,
+};
 
-// export default AnswerButton;
+export default AnswerButton;
