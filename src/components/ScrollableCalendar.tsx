@@ -128,6 +128,15 @@ const StyledDateRangePicker = styled(DateRangePicker)`
         height:51px; 
     }
 
+    /* 일자 Acitve 스타일링 */
+    .rdrStartEdge { 
+        border-radius:150px 0px 0px 150px;
+    }
+    .rdrEndEdge { 
+        border-radius:0px 150px 150px 0px;
+    }
+    
+    
     .rdrDayNumber {
         position:static;
         width:100%;
@@ -138,8 +147,11 @@ const StyledDateRangePicker = styled(DateRangePicker)`
         z-index:99;
     }
 
-    .rdrDay--inRange, .rdrDay--selected,
-    .rdrInRange, .rdrStartEdge, .rdrEndEdge {
+    .rdrDay--inRange,
+    .rdrDay--selected,
+    .rdrInRange,
+    .rdrStartEdge,
+    .rdrEndEdge {
         background-color: ${colors.mainColor} !important;
         color: white !important;
 
