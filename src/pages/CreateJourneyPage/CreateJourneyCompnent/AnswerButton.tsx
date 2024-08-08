@@ -45,9 +45,12 @@ function AnswerButton(props) {
 
         if (isActive === false) {
             SetisActive(true)
-        } else SetisActive(false)
-        
-        console.log(isActive)
+            console.log(contents)
+        } 
+        else if (isActive === true) {
+            SetisActive(false) 
+        }
+          
 
     }
 
