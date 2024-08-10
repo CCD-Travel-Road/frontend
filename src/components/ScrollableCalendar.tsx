@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
@@ -9,9 +8,9 @@ import { ko } from 'date-fns/locale';
 import styled from 'styled-components';
 import { dateRangeState } from '../recoil/atoms'
 import { colors } from '../styles/GlobalStyles';
+import Modal from './Modal';
 
 function ScrollableCalendar() {
-    const navigate = useNavigate();
     const [selectionRange, setSelectionRange] = useState({
         startDate: new Date(),
         endDate: new Date(),
@@ -19,6 +18,7 @@ function ScrollableCalendar() {
     });
 
     const [isButtonVisible, setIsButtonVisible] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [, setDateRange] = useRecoilState(dateRangeState);
 
 
@@ -30,8 +30,6 @@ function ScrollableCalendar() {
         const startDate = format(selection.startDate, 'yyyy-MM-dd');
         const endDate = format(selection.endDate, 'yyyy-MM-dd');
         console.log(`StartDate: ${startDate}, EndDate: ${endDate}`);
-
-        console.log('Setting button visible');
         setIsButtonVisible(true);
     };
 
@@ -40,7 +38,11 @@ function ScrollableCalendar() {
             startDate: selectionRange.startDate,
             endDate: selectionRange.endDate,
         });
-        navigate('/map');
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
     };
 
     return (
@@ -67,6 +69,7 @@ function ScrollableCalendar() {
             {isButtonVisible && (
                 <NextButton onClick={handleNextButtonClick}>다음으로</NextButton>
             )}
+            <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
         </CalendarWrapper>
     );
 }
@@ -134,5 +137,5 @@ const NextButton = styled.button`
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    z-index: 1000;
+    z-index: 10;
 `;
