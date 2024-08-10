@@ -14,7 +14,7 @@ function DateContainer() {
 
     useEffect(() => {
         if (startDate) {
-            setSelectedDate(new Date(startDate)); // 처음에 첫째 날을 선택된 날짜로 설정
+            setSelectedDate(new Date(startDate));
         }
     }, [startDate]);
 
@@ -54,8 +54,8 @@ function DateContainer() {
             <SelectedDate>
                 {selectedDate && (
                     <>
-                        <DateText>{`${selectedDate.toLocaleDateString('ko-KR')}`}</DateText>
-                        <DayInfo>{`(${selectedDay})`}</DayInfo>
+                        <DayInfo>{format(new Date(selectedDate), 'yyyy년 MM월 dd일', { locale: ko })}</DayInfo>
+                        <DayText>{`${selectedDay}`}</DayText>
                     </>
                 )}
             </SelectedDate>
@@ -64,10 +64,13 @@ function DateContainer() {
             </DropdownButton>
             {isDropdownOpen && (
                 <DropdownMenu>
-                    {generateDateOptions().map((date) => (
-                        <DateOption key={date.toString()} onClick={() => handleDateSelect(date)}>
-                            {date.toLocaleDateString('ko-KR')} ({getDayLabel(date, new Date(startDate))})
-                        </DateOption>
+                    {generateDateOptions().map((date, index) => (
+                        <>
+                            <DateOption key={date.toString()} onClick={() => handleDateSelect(date)}>
+                                {format(new Date(date), 'yyyy년 MM월 dd일', { locale: ko })}
+                            </DateOption>
+                            {index < generateDateOptions().length - 1 && <Divider />}
+                        </>
                     ))}
                 </DropdownMenu>
             )}
@@ -80,7 +83,7 @@ export default DateContainer;
 // styled-components
 const Container = styled.div`
     padding: 16px;
-    background-color: #f5f5f5;
+    background-color: #fff;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -96,23 +99,27 @@ const DateRange = styled.p`
 
 const SelectedDate = styled.div`
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
     margin-bottom: 8px;
+    gap: 10px;
 `;
 
-const DateText = styled.p`
+const DayText = styled.p`
     font-family: 'Pretendard', sans-serif;
-    font-size: 14px;
-    color: #333;
+    font-size: 10px;
+    color: #fff;
+    background-color: ${colors.mainColor};
+    border-radius: 20px;
+    padding: 4px 8px; /* 내부 글씨 크기에 맞는 패딩 */
     margin: 0;
 `;
 
 const DayInfo = styled.p`
     font-family: 'Pretendard', sans-serif;
-    font-size: 14px;
+    font-size: 20px;
     color: ${colors.mainColor};
-    font-weight: 600; /* SemiBold */
+    font-weight: 600;
     margin: 0;
 `;
 
@@ -131,15 +138,27 @@ const DropdownMenu = styled.div`
     border: 1px solid #ddd;
     background: white;
     width: 100%;
-    max-height: 200px; /* 드롭다운 메뉴의 최대 높이 */
-    overflow-y: auto; /* 스크롤 가능 */
-    position: fixed; /* 드롭다운 메뉴를 버튼 아래에 위치시키기 위해 필요 */
+    height: auto;
+    max-height: 100px;
+    overflow-y: auto;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 10px 0;
 `;
 
 const DateOption = styled.div`
     padding: 8px;
+    font-weight: 500;
+    font-size: 14px;
     cursor: pointer;
     &:hover {
         background: #f0f0f0;
     }
+`;
+
+const Divider = styled.div`
+    height: 1px;
+    background-color: #e7e7e7;
+    margin: 5px 0;
 `;
