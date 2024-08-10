@@ -17,7 +17,7 @@ const Wrapper = styled.div`
     width:100%;
     display:flex;
 
-    padding:12px 20px 20px 20px;
+    padding:12px 20px;
     background-color:white;
     box-shadow: 0 -4px 0px rgba(0, 0, 0, 0.04);
 

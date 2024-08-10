@@ -21,7 +21,6 @@ function ScrollableCalendar() {
     const [isButtonVisible, setIsButtonVisible] = useState(false);
     const [, setDateRange] = useRecoilState(dateRangeState);
 
-
     const handleSelect = (ranges) => {
         const { selection } = ranges;
         setSelectionRange(selection);
