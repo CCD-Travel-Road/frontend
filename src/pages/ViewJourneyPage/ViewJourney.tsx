@@ -1,6 +1,8 @@
 // components
 import Navigation from "src/components/Navigation/Navigation";
+
 import * as T from "./Styles"
+
 
 
 function ViewJourney() {
@@ -8,6 +10,8 @@ function ViewJourney() {
     return (
 
         <T.EntireContainer>
+
+
 
             <Navigation/>
 

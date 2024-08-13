@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
@@ -23,7 +23,7 @@ function ScrollableCalendar() {
     const [isButtonVisible, setIsButtonVisible] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [, setDateRange] = useRecoilState(dateRangeState);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const handleSelect = (ranges) => {
         const { selection } = ranges;
@@ -173,8 +173,8 @@ const StyledDateRangePicker = styled(DateRangePicker)`
 
 `;
 
-const NextButton = styled.button`
-    position: fixed;
+const ButtonFrame = styled.button`
+    /* position: fixed;
     width: 80%;
     bottom: 20%;
     left: 50%;
@@ -186,5 +186,6 @@ const NextButton = styled.button`
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    z-index: 10;
+    z-index: 10; */
+    width:100%;
 `;
