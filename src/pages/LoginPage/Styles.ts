@@ -75,8 +75,10 @@ export const StoreLoginText = styled.p`
 export const LoginUtilFrame = styled.div`
     margin-top:20px;
     display:flex;
+    justify-content:center;
 
-    width: 50%;
+    width: 100%;
+    gap: 16px;
 `;
 
 export const SignUp = styled.p`
