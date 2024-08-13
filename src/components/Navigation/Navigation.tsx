@@ -52,8 +52,8 @@ function Navigation() {
             </ClickFrame>
 
             <ClickFrame onClick={() => { nav('/setDate') }}>
-                <NavigationItem title="여행 제작" icon={isTravelCreationActive ? createActive : createInActive}
-                    active={isTravelCreationActive} />
+                <NavigationItem title="여행 제작" icon={location.pathname === '/setDate' || location.pathname === '/map' ? createActive : createInActive}
+                    active={location.pathname === "/setDate" || location.pathname === "/map"} />
             </ClickFrame>
 
             <ClickFrame onClick={() => { nav('/community') }}>

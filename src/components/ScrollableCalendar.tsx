@@ -9,6 +9,7 @@ import { ko } from 'date-fns/locale';
 import styled from 'styled-components';
 import { dateRangeState } from '../recoil/atoms'
 import { colors } from '../styles/GlobalStyles';
+import Modal from './Modal';
 
 import FuncButton from './Button/FuncButton';
 
@@ -20,6 +21,7 @@ function ScrollableCalendar() {
     });
 
     const [isButtonVisible, setIsButtonVisible] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [, setDateRange] = useRecoilState(dateRangeState);
     const navigate = useNavigate();
 
@@ -31,7 +33,6 @@ function ScrollableCalendar() {
         const startDate = format(selection.startDate, 'yyyy-MM-dd');
         const endDate = format(selection.endDate, 'yyyy-MM-dd');
         console.log(`StartDate: ${startDate}, EndDate: ${endDate}`);
-
         setIsButtonVisible(true);
     };
 
@@ -40,7 +41,11 @@ function ScrollableCalendar() {
             startDate: selectionRange.startDate,
             endDate: selectionRange.endDate,
         });
-        navigate('/setType');
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
     };
 
     return (
@@ -72,6 +77,7 @@ function ScrollableCalendar() {
                 </ButtonFrame>
                 
             )}
+            <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
         </CalendarWrapper>
     );
 }
@@ -167,6 +173,18 @@ const StyledDateRangePicker = styled(DateRangePicker)`
 
 `;
 
-const ButtonFrame = styled.div`
-    width:100%;
-`
+const NextButton = styled.button`
+    position: fixed;
+    width: 80%;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: ${colors.mainColor};
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 10;
+`;
