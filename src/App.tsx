@@ -10,11 +10,14 @@ import ViewJourney from './pages/ViewJourneyPage/ViewJourney';
 
 import Community from './pages/CommunityPage/Community'
 
+import LoginPage from './pages/LoginPage/LoginPage';
+
 function App() {
   return (
     <RecoilRoot>
       <GlobalStyles />
       <Routes>
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/map" element={<MapPage />} />
         <Route path="/" element={<MainPage />} />
         <Route path="/setDate" element={<ASetDate />} />
