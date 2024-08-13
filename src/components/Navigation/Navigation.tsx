@@ -35,6 +35,8 @@ function Navigation() {
     const nav = useNavigate();
     const location = useLocation();
 
+    const isTravelCreationActive = location.pathname.startsWith('/setDate') || location.pathname.startsWith('/setType');
+
     return (
 
         <Wrapper>

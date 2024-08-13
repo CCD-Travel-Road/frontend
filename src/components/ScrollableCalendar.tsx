@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
@@ -10,6 +11,8 @@ import { dateRangeState } from '../recoil/atoms'
 import { colors } from '../styles/GlobalStyles';
 import Modal from './Modal';
 
+import FuncButton from './Button/FuncButton';
+
 function ScrollableCalendar() {
     const [selectionRange, setSelectionRange] = useState({
         startDate: new Date(),
@@ -20,7 +23,7 @@ function ScrollableCalendar() {
     const [isButtonVisible, setIsButtonVisible] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [, setDateRange] = useRecoilState(dateRangeState);
-
+    const navigate = useNavigate();
 
     const handleSelect = (ranges) => {
         const { selection } = ranges;
@@ -59,15 +62,20 @@ function ScrollableCalendar() {
                 renderStaticRangeLabel={() => ''} // 사용자 정의 레이블 렌더링
                 scroll={{
                     enabled: true, // 무한 스크롤 활성화
-                    monthHeight: 300, // 각 달의 높이 설정
-                    longMonthHeight: 350, // 긴 달의 높이 설정 (일수 차이로 인해)
+                    monthHeight: 400, // 각 달의 높이 설정
+                    longMonthHeight: 400, // 긴 달의 높이 설정 (일수 차이로 인해)
                     calendarWidth: 800, // 달력 전체의 너비 설정
                     calendarHeight: 600, // 달력 전체의 높이 설정
                 }}
                 locale={ko}
+                color={colors.mainColor}
             />
-            {isButtonVisible && (
-                <NextButton onClick={handleNextButtonClick}>다음으로</NextButton>
+            {isButtonVisible && (  
+                
+                <ButtonFrame onClick={handleNextButtonClick }>
+                    <FuncButton text="다음으로"/>
+                </ButtonFrame>
+                
             )}
             <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
         </CalendarWrapper>
@@ -79,9 +87,6 @@ export default ScrollableCalendar;
 const CalendarWrapper = styled.div`
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     overflow: hidden;
     box-sizing: border-box;
     position: relative;
@@ -94,11 +99,13 @@ const CalendarWrapper = styled.div`
 const StyledDateRangePicker = styled(DateRangePicker)`
     width: 100%;
     height: auto;
+    color: ${colors.mainColor};
 
     /* 내부 클래스 스타일링 */
     .rdrCalendarWrapper, .rdrDateRangeWrapper, .rdrMonth {
         width: 100%;
         height: auto; 
+        
     }
 
     .rdrCalendarWrapper {
@@ -109,19 +116,61 @@ const StyledDateRangePicker = styled(DateRangePicker)`
     .rdrDateRangeWrapper {
         width: 100%;
         height: auto; /* 필요에 따라 설정 */
+        background-color:#f9f9f9;
+    }
+    
+    .rdrDateDisplayWrapper {
+        background-color:#f9f9f9;
+    }
+
+    /* 일별 스타일링 */
+    .rdrDays {
+        justify-content:space-between;
     }
     
     .rdrDay {
-        margin: 5px 0; 
+        margin: 4px 0px;
+        width:calc(100% / 7);
+        height:51px; 
     }
 
-    .rdrDay--inRange, .rdrDay--selected {
-        margin: 5px 0; 
+    /* 일자 Acitve 스타일링 */
+    .rdrStartEdge { 
+        border-radius:150px 0px 0px 150px;
+    }
+    .rdrEndEdge { 
+        border-radius:0px 150px 150px 0px;
+    }
+    
+    
+    .rdrDayNumber {
+        position:static;
+        width:100%;
+        height:100%;
+    }
+
+    .rdrDayNumber span {
+        z-index:99;
+    }
+
+    .rdrDay--inRange,
+    .rdrDay--selected,
+    .rdrInRange,
+    .rdrStartEdge,
+    .rdrEndEdge {
+        background-color: ${colors.mainColor} !important;
+        color: white !important;
+
+        top:0px;
+        bottom:0px;
+        right:0px;
+        left:0px;
     }
 
     .rdrDay--endOfMonth {
         margin: 5px 0; 
     }
+
 `;
 
 const NextButton = styled.button`
