@@ -13,6 +13,8 @@ function ViewJourney() {
         <T.EntireContainer>
 
             <FunctionHeader content="여행 조회" />
+            
+
 
             <Navigation/>
 
