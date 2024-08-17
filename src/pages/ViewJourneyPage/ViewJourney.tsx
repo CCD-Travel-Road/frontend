@@ -4,8 +4,11 @@ import { useState, useEffect } from "react";
 import Navigation from "src/components/Navigation/Navigation";
 import FunctionHeader from "src/components/Header/FunctionHeader";
 import SearchBar from "src/components/SearchBar";
+import FuncButton from "src/components/Button/FuncButton";
 
 import ViewList from "./ViewList";
+
+import plusIcon from "../../images/plus.png"
 
 import * as T from "./Styles"
 import { db } from "../../firebase"
@@ -49,8 +52,7 @@ function ViewJourney() {
                 </T.ViewListContainer>
             </T.ContentsFrame>
             
-
-
+            <FuncButton text="코스 추가하기" imageSrc={plusIcon} includeIcon/>
             <Navigation/>
 
         </T.EntireContainer>

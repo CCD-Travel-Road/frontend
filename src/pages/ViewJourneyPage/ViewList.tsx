@@ -26,6 +26,8 @@ ViewList.propTypes = {
         PropTypes.shape({
             id: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
+            date: PropTypes.string.isRequired,
+            cost: PropTypes.string.isRequired,
         })
     ).isRequired,
 };
