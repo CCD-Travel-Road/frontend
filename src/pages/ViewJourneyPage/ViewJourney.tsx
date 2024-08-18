@@ -5,6 +5,7 @@ import Navigation from "src/components/Navigation/Navigation";
 import FunctionHeader from "src/components/Header/FunctionHeader";
 import SearchBar from "src/components/SearchBar";
 import FuncButton from "src/components/Button/FuncButton";
+import FilterSlide from "./FilterSlide";
 
 import ViewList from "./ViewList";
 
@@ -17,6 +18,17 @@ import filterIcon from "../../images/filter.png"
 function ViewJourney() {
 
     const [data, setData] = useState([]);
+    const [isClick, setIsClick] = useState(false);
+
+    const handleFilter = () => {
+
+        if (isClick === false) {
+            setIsClick(true)
+        } 
+        else if (isClick === true) {
+            setIsClick(false) 
+        }
+    }
 
     useEffect(() => {
         const tempData = [];
@@ -39,7 +51,7 @@ function ViewJourney() {
             <T.ContentsFrame>
                 {/* 유틸요소 */}
                 <SearchBar placeholder="여행제목을 검색하세요."/>
-                <T.FilterFrame>
+                <T.FilterFrame onClick={handleFilter}>
                     <T.FilterElements>기간 · 예산</T.FilterElements>
                     <T.DetailsFilter src={filterIcon}/>
                 </T.FilterFrame>
@@ -52,8 +64,15 @@ function ViewJourney() {
                 </T.ViewListContainer>
             </T.ContentsFrame>
             
-            <FuncButton text="코스 추가하기" imageSrc={plusIcon} includeIcon/>
+            <FuncButton text="코스 추가하기" imageSrc={plusIcon} 
+                                            navUrl="setDate" 
+                                            includeIcon/>
+                                            
+            {/* 네비게이션 */}
             <Navigation/>
+
+            {/* 슬라이드 */}
+            <FilterSlide/>
 
         </T.EntireContainer>
 

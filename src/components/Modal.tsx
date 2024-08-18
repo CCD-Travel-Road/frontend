@@ -35,7 +35,7 @@ function Modal({ isOpen, onClose }: ModalProps) {
                     <Subtitle>AI와 대화를 통해 코스를 추천해줍니다.</Subtitle>
                 </TextContent>
                 <ButtonContainer>
-                    <ButtonLeft onClick={handleNoHelp}>이미 코스정함!</ButtonLeft>
+                    <ButtonLeft onClick={handleNoHelp}>이미 계획이있어요!</ButtonLeft>
                     <ButtonRight onClick={handleHelp}>도와주세요!</ButtonRight>
                 </ButtonContainer>
             </ModalContent>

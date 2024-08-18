@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import PropTypes from 'prop-types';
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
     width:calc(100% - 40px);
@@ -40,11 +41,12 @@ const Image = styled.img`
 
 function FuncButton(props) {
 
-    const { onClick, text, includeIcon, imageSrc } = props;
+    const { navUrl, text, includeIcon, imageSrc } = props;
+    const navigate = useNavigate();
 
     return (
 
-        <Wrapper onClick={onClick}>
+        <Wrapper onClick={() => navigate(`/${navUrl}`)}>
             {
                 includeIcon === true
 
@@ -64,7 +66,7 @@ function FuncButton(props) {
 }
 
 FuncButton.propTypes = {
-    onClick: PropTypes.string.isRequired,
+    navUrl: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     includeIcon: PropTypes.bool.isRequired,
     imageSrc: PropTypes.string.isRequired,
