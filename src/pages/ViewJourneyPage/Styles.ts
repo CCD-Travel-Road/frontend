@@ -1,10 +1,27 @@
 import styled from 'styled-components';
 
+interface WrapperProps {
+    active: boolean;
+}
+
 export const EntireContainer = styled.div`
     width: 100vw;
     min-height:100vh;
 
     background:white;
+`;
+
+export const BlackOverlay = styled.div<WrapperProps>`
+    width: 100vw;
+    min-height:100vh;
+    position:absolute;
+    top:0px;
+    left:0px;
+    z-index:100;
+
+    display: ${(props) => (props.active ? 'block' : 'none')};
+
+    background:rgba(0, 0, 0, 0.4);
 `;
 
 export const ContentsFrame = styled.div`
