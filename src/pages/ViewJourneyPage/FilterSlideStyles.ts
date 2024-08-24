@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 
-interface WrapperProps {
-    active: boolean;
+interface ChoiceButtonProps {
+    isFilter?: boolean;
 }
 
-export const Wrapper = styled.div<WrapperProps>`
+interface ChoiceCostProps {
+    isCost?: boolean;
+}
+
+export const Wrapper = styled.div<{ active: boolean }>`
     position: fixed;
     bottom: ${(props) => (props.active ? '0' : '-100%')};
     left: 0;
@@ -54,25 +58,80 @@ export const ChoiceButtonFrame = styled.div`
     margin-bottom:24px;
 `;
 
-export const ChoiceButton = styled.div`
+export const ChoiceButton = styled.div<ChoiceButtonProps>`
     width: 100%;
     display:flex;
     align-items:center;
     justify-content:center;
     padding:12px 0px;
 
-    background-color:#f4f4f4;
+    background-color: ${(props) => (props.isFilter ? 'var(--brandColor)' : '#f4f4f4')};
     border-radius:8px;
 
     font-size: 12px;
     font-weight:600;
-    color:var(--textColor);
+    color: ${(props) => (props.isFilter ? 'white' : 'var(--textColor)')};
 `;
 
 // Cost
 export const CostContainer = styled.div`
     width: 100%;
 `;
+
+export const CostInputFrame = styled.div`
+    width: 100%;
+`;
+
+export const CostInputBar = styled.input`
+    width: 100%;
+`;
+
+    export const CostViewFrame = styled.div`
+        width: 100%;
+        display:flex;
+        align-items:center;
+        gap:12px;
+
+        margin:16px 0px 60px 0px;
+    `;
+
+    export const CostMinimumFrame = styled.div<ChoiceCostProps>`
+        width: 100%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        background-color: ${(props) => (props.isCost ? 'var(--brandColor)' : '#f9f9f9')};
+        padding:12px 0px;
+        border-radius: 8px;
+    `;
+
+    export const CostMaximumFrame = styled.div<ChoiceCostProps>`
+        width: 100%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        background-color: ${(props) => (props.isCost ? 'var(--brandColor)' : '#f9f9f9')};
+        padding:12px 0;
+        border-radius: 8px;
+    `;
+
+    export const CostMinimum = styled.p<ChoiceCostProps>`
+        width: 100%;
+        text-align:center;
+        font-size: 12px;
+        font-weight:600;
+        color: ${(props) => (props.isCost ? 'white' : '#888888')};
+    `;
+
+    export const CostMaximum = styled.p<ChoiceCostProps>`
+        width: 100%;
+        text-align:center;
+        font-size: 12px;
+        font-weight:600;
+        color: ${(props) => (props.isCost ? 'white' : '#888888')};
+    `;
 
 // Button
 export const CheckButton = styled.div`
