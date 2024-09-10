@@ -1,6 +1,20 @@
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { createRoot } from 'react-dom/client';
+import styled from 'styled-components';
 import { selectedLocationState, searchedLocationState } from "../../recoil/atoms";
+import InfoBox from "./InfoBox";
+
+interface MapContainerProps {
+    disableClicks: boolean;
+}
+
+const MapContainer = styled.div<MapContainerProps>`
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    pointer-events: ${(props) => (props.disableClicks ? 'none' : 'auto')};
+`;
 
 function MapBox() {
     const [, setLocation] = useRecoilState(selectedLocationState);
@@ -10,6 +24,7 @@ function MapBox() {
     const [marker, setMarker] = useState(null);
     const [customOverlay, setCustomOverlay] = useState(null);
     const [initialLoad, setInitialLoad] = useState(true);
+    const [disableClicks,] = useState(false); // 사용되지 않는 상태 변수
 
     useEffect(() => {
         const initializeMap = () => {
@@ -33,12 +48,14 @@ function MapBox() {
                     const newCustomOverlay = new window.kakao.maps.CustomOverlay({
                         position: new window.kakao.maps.LatLng(0, 0),
                         content: '',
-                        yAnchor: 1.3,
+                        yAnchor: 1,
                         map: null,
                     });
                     setCustomOverlay(newCustomOverlay);
 
                     window.kakao.maps.event.addListener(newMap, 'click', (mouseEvent) => {
+                        if (disableClicks) return;  // 클릭 비활성화 상태일 때 이벤트 차단
+
                         const latlng = mouseEvent.latLng;
                         newMarker.setPosition(latlng);
                         newMarker.setMap(newMap);
@@ -64,33 +81,19 @@ function MapBox() {
                                                 };
                                                 setPlaceInfo(updatedPlaceInfo);
 
-                                                const content = `
-                                                    <div style="
-                                                        font-family: 'Pretendard';
-                                                        font-size: 14px;
-                                                        color: #333;
-                                                        width: 250px;
-                                                        height: ${roadAddress ? '130px' : '100px'};
-                                                        padding: 10px;
-                                                        background-color: #fff;
-                                                        border-radius: 8px;
-                                                        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
-                                                        display: flex;
-                                                        flex-direction: column;
-                                                        justify-content: space-between;
-                                                    ">
-                                                        <div style="flex: 1;">
-                                                            <h2 style="margin: 5px; font-family: 'Pretendard'; font-size: 16px; color: #333;">${placeNameFromSearch || addressName}</h2>
-                                                            ${roadAddress ? `<p style="margin: 2px 5px; font-size: 14px; color: #666;">${roadAddress}</p>` : ''}
-                                                        </div>
-                                                        ${roadAddress ? '<div style="height: 1px; background-color: #e7e7e7; margin: 10px 0;"></div>' : ''}
-                                                        <div style="display: flex; flex-direction: row; gap: 10px;">
-                                                            <button style="padding: 10px 10px; background-color: #2958DB; color: #fff; border: none; border-radius: 8px; cursor: pointer; flex: 1;">추가하기</button>
-                                                            <button style="padding: 10px 10px; background-color: #fff; color: #2958DB; border: 1px solid #2958DB; border-radius: 8px; cursor: pointer; flex: 1;">자세히 보기</button>
-                                                        </div>
-                                                    </div>
-                                                `;
-                                                newCustomOverlay.setContent(content);
+                                                const infoBoxContainer = document.createElement('div');
+                                                const root = createRoot(infoBoxContainer); // createRoot 사용
+                                                root.render(
+                                                    <InfoBox
+                                                        placeName={placeNameFromSearch || addressName}
+                                                        roadAddress={roadAddress}
+                                                        onAddClick={() => alert('장소가 추가되었습니다.')}
+                                                        onDetailsClick={() => alert('자세히 보기 클릭됨')}
+                                                    />
+                                                );
+
+                                                newCustomOverlay.setContent(infoBoxContainer);
+                                                newCustomOverlay.setContent(infoBoxContainer);
                                                 newCustomOverlay.setPosition(latlng);
                                                 newCustomOverlay.setMap(newMap);
                                                 newMap.setCenter(latlng);
@@ -144,7 +147,7 @@ function MapBox() {
                 document.head.removeChild(script);
             }
         };
-    }, []);
+    }, [disableClicks]);
 
     useEffect(() => {
         if (searchedLocation && map && marker && customOverlay) {
@@ -172,36 +175,19 @@ function MapBox() {
                     // 선택된 장소명과 주소 처리
                     const placeNameFromResult = placeName || defaultPlaceName;
                     const addressToDisplay = roadAddressName || landAddressName || '주소 없음';
-
-                    const content = `
-                        <div style="
-                            font-family: 'Pretendard';
-                            font-size: 14px;
-                            color: #333;
-                            width: 250px;
-                            height: ${roadAddressName || landAddressName ? '130px' : '100px'};
-                            padding: 10px;
-                            background-color: #fff;
-                            border-radius: 8px;
-                            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: space-between;
-                        ">
-                            <div style="flex: 1;">
-                                <h2 style="margin: 5px; font-family: 'Pretendard'; font-size: 16px; color: #333;">${placeNameFromResult}</h2>
-                                ${addressToDisplay ? `<p style="margin: 2px 5px; font-size: 14px; color: #666;">${addressToDisplay}</p>` : ''}
-                            </div>
-                            ${addressToDisplay ? '<div style="height: 1px; background-color: #e7e7e7; margin: 10px 0;"></div>' : ''}
-                            <div style="display: flex; flex-direction: row; gap: 10px;">
-                                <button style="padding: 10px 10px; background-color: #2958DB; color: #fff; border: none; border-radius: 8px; cursor: pointer; flex: 1;">추가하기</button>
-                                <button style="padding: 10px 10px; background-color: #fff; color: #2958DB; border: 1px solid #2958DB; border-radius: 8px; cursor: pointer; flex: 1;">자세히 보기</button>
-                            </div>
-                        </div>
-                    `;
+                    const infoBoxContainer = document.createElement('div');
+                    const root = createRoot(infoBoxContainer); // createRoot 사용
+                    root.render(
+                        <InfoBox
+                            placeName={placeNameFromResult}
+                            roadAddress={addressToDisplay}
+                            onAddClick={() => alert('장소가 추가되었습니다.')}
+                            onDetailsClick={() => alert('자세히 보기 클릭됨')}
+                        />
+                    );
 
                     if (customOverlay) {
-                        customOverlay.setContent(content);
+                        customOverlay.setContent(infoBoxContainer);
                         customOverlay.setPosition(latlng);
                         customOverlay.setMap(map);
                         map.setCenter(latlng);
@@ -215,7 +201,9 @@ function MapBox() {
     }, [searchedLocation, map, marker, customOverlay]);
 
     return (
-        <div id="map" style={{ width: '100%', height: '100vh' }} />
+        <MapContainer disableClicks={disableClicks}>
+            <div id="map" style={{ width: '100%', height: '100vh' }} />
+        </MapContainer>
     );
 }
 
