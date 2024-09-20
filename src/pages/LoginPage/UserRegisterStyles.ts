@@ -150,6 +150,10 @@ export const GenderOption = styled.option`
     color:#333;
 `
 
+export const SubmitButton = styled.button`
+    width:100%;
+`
+
 // Absolute
 export const BackTitle = styled.p`
     font-size: 12px;
