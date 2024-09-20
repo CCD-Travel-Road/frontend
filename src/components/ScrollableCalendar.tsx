@@ -31,6 +31,7 @@ function ScrollableCalendar() {
         const startDate = format(selection.startDate, 'yyyy-MM-dd');
         const endDate = format(selection.endDate, 'yyyy-MM-dd');
         console.log(`StartDate: ${startDate}, EndDate: ${endDate}`);
+
         setIsButtonVisible(true);
     };
 
@@ -134,12 +135,11 @@ const StyledDateRangePicker = styled(DateRangePicker)`
 
     /* 일자 Acitve 스타일링 */
     .rdrStartEdge { 
-        border-radius:150px 0px 0px 150px;
+        border-radius:150px 0px 0px 150px !important;
     }
     .rdrEndEdge { 
         border-radius:0px 150px 150px 0px;
     }
-    
     
     .rdrDayNumber {
         position:static;
@@ -174,7 +174,7 @@ const StyledDateRangePicker = styled(DateRangePicker)`
 const ButtonFrame = styled.button`
     position: fixed;
     width: calc(100% - 40px);
-    bottom: 16%;
+    bottom: calc(94.5px + 20px);
     left: 50%;
     transform: translateX(-50%);
     background-color: ${colors.mainColor};

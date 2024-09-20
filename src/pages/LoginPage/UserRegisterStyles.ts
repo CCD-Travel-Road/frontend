@@ -155,8 +155,8 @@ export const SubmitButton = styled.button`
     width:100%;
     padding:12px;
     background-color:var(--brandColor);
+    border:1px solid var(--brandColor);
     border-radius:8px;
-    border:none;
 
     font-size: 14px;
     font-weight:bold;
