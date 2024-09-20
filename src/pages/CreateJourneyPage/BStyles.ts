@@ -44,8 +44,14 @@ export const ActiveBar = styled.div`
 export const ContentFrame = styled.div`
     width: 100%;
     height: 100%; 
-    padding:24px 20px;
+    margin-bottom:36px;
+    padding:0px 20px;
+    
     overflow-y: auto;
+
+    &:nth-child(3) {
+        padding:24px 20px 0px 20px;
+    }
 `;
 
 export const SubTItle = styled.div`

@@ -1,5 +1,5 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
 import cancleIcon from "../images/cancle.png"
 
 const Wrapper = styled.div`
@@ -23,9 +23,11 @@ const Icon = styled.img`
 
 function CancleText() {
 
+    const navigate = useNavigate();
+
     return (
 
-        <Wrapper>
+        <Wrapper onClick={() => {navigate('/')}} >
             <Text>취소하기</Text>
             <Icon src={cancleIcon} />
         </Wrapper>

@@ -18,7 +18,7 @@ function Modal({ isOpen, onClose }: ModalProps) {
     };
 
     const handleHelp = () => {
-        navigate('/help');
+        navigate('/setType');
     };
 
     return (
