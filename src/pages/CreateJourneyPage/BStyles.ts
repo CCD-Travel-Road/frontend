@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface TapMenuItemProps {
+    isActive: boolean;
+}
+
 export const EntireContainer = styled.div`
     width: 100%;
 `;
@@ -22,13 +26,13 @@ export const TapMenu = styled.div`
     position:relative;
 `;
 
-export const TapMenuItem = styled.div`
+export const TapMenuItem = styled.div<TapMenuItemProps>`
     width:50%;
 
     font-size: 14px;
     font-weight: 400;
-    color:#888;
-`;
+    color:${(props) => (props.isActive ? '#333333' : '#888888')};
+`
 
 export const ActiveBar = styled.div`
     width:50%;
@@ -38,6 +42,7 @@ export const ActiveBar = styled.div`
     position:absolute;
     bottom:0px;
     left:0px;
+    transition:all .3s;
 `;
 
 // Content

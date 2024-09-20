@@ -10,12 +10,15 @@ import AnswerButton from "./CreateJourneyCompnent/AnswerButton";
 
 import * as T from './BStyles';
 
-function BSetDate() {
+function BSetType() {
 
+    // 선택된 탭 상태
+    const [activeTab, setActiveTab] = useState('선택형');
+
+    // 선택형 대답
     const [activeAnswerForWho, setActiveAnswerForWho] = useState(null);
     const [activeAnswerBudget, setActiveAnswerBudget] = useState(null);
     const [activeAnswerPurpose, setActiveAnswerPurpose] = useState(null);
-
 
     return (
         <T.EntireContainer>
@@ -26,10 +29,12 @@ function BSetDate() {
             </T.TitleFrame>
 
             <T.TapMenu>
-                <T.TapMenuItem>선택형</T.TapMenuItem>
-                <T.TapMenuItem>대화형</T.TapMenuItem>
+                <T.TapMenuItem isActive={activeTab === "선택형"} onClick={() => setActiveTab('선택형')}>선택형</T.TapMenuItem>
+                <T.TapMenuItem isActive={activeTab === "대화형"} onClick={() => setActiveTab('대화형')}>대화형</T.TapMenuItem>
 
-                <T.ActiveBar/>
+                <T.ActiveBar
+                    style={{ left: activeTab === '선택형' ? '0%' : '50%' }} // 활성화된 탭에 따라 ActiveBar 이동
+                />
             </T.TapMenu>
 
             <T.ContentFrame>
@@ -103,4 +108,4 @@ function BSetDate() {
     );
 }
 
-export default BSetDate;
+export default BSetType;
