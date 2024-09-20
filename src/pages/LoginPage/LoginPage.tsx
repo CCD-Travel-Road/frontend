@@ -1,6 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import * as T from './Styles';
 
 function LoginPage() {
+
+    const navigate = useNavigate();
 
     return (
 
@@ -10,7 +13,7 @@ function LoginPage() {
 
             <T.LoginContainer>
                 <T.UserLogin>
-                    <T.UserLoginText>로그인</T.UserLoginText>
+                    <T.UserLoginText onClick={() => navigate('/userLogin')}>로그인</T.UserLoginText>
                 </T.UserLogin>
                 <T.StoreLogin>
                     <T.StoreLoginText>가게 로그인</T.StoreLoginText>
@@ -18,7 +21,7 @@ function LoginPage() {
 
                 {/* LoginUtilFrame */}
                 <T.LoginUtilFrame>
-                    <T.SignUp>회원가입</T.SignUp>
+                    <T.SignUp onClick={() => navigate('/userRegister')}>회원가입</T.SignUp>
                     {/* <T.FindPW>비밀번호 찾기</T.FindPW> */}
                 </T.LoginUtilFrame>
             </T.LoginContainer>

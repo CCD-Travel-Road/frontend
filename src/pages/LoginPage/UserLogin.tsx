@@ -1,31 +1,29 @@
-import * as T from './Styles';
+import { useNavigate } from 'react-router-dom';
+import * as T from './UserLoginStyles';
 
-function LoginPage() {
+function UserLogin() {
+
+    const navigate = useNavigate();
 
     return (
 
         <T.Wrapper>
-            
-            <T.Logo>YeoRo</T.Logo>
+            <T.BackTitle onClick={() => navigate(-1)}>돌아가기</T.BackTitle>
 
-            <T.LoginContainer>
-                <T.UserLogin>
-                    <T.UserLoginText>로그인</T.UserLoginText>
-                </T.UserLogin>
-                <T.StoreLogin>
-                    <T.StoreLoginText>가게 로그인</T.StoreLoginText>
-                </T.StoreLogin>
+            <T.Title>로그인</T.Title>
 
-                {/* LoginUtilFrame */}
-                <T.LoginUtilFrame>
-                    <T.SignUp>회원가입</T.SignUp>
-                    {/* <T.FindPW>비밀번호 찾기</T.FindPW> */}
-                </T.LoginUtilFrame>
-            </T.LoginContainer>
+            <T.InputFrame>
+                <T.EmailInput placeholder='이메일을 입력해주세요.' />
+                <T.PasswordInput placeholder='비밀번호를 입력해주세요.' />
+            </T.InputFrame>
+
+            <T.SubmitButton>로그인</T.SubmitButton>
+            <T.FindPassword>비밀번호 찾기</T.FindPassword>
+
         </T.Wrapper>
 
     )
 
 }
 
-export default LoginPage;
+export default UserLogin;
