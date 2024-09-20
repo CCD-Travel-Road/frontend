@@ -32,9 +32,7 @@ function BSetType() {
                 <T.TapMenuItem isActive={activeTab === "선택형"} onClick={() => setActiveTab('선택형')}>선택형</T.TapMenuItem>
                 <T.TapMenuItem isActive={activeTab === "대화형"} onClick={() => setActiveTab('대화형')}>대화형</T.TapMenuItem>
 
-                <T.ActiveBar
-                    style={{ left: activeTab === '선택형' ? '0%' : '50%' }} // 활성화된 탭에 따라 ActiveBar 이동
-                />
+                <T.ActiveBar isActive={activeTab === "선택형"}/>
             </T.TapMenu>
 
             <T.ContentFrame>

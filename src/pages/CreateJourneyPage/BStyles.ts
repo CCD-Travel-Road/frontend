@@ -34,14 +34,14 @@ export const TapMenuItem = styled.div<TapMenuItemProps>`
     color:${(props) => (props.isActive ? '#333333' : '#888888')};
 `
 
-export const ActiveBar = styled.div`
+export const ActiveBar = styled.div<TapMenuItemProps>`
     width:50%;
     height:4px;
     background-color:#2958DB;
     
     position:absolute;
     bottom:0px;
-    left:0px;
+    left:${(props) => (props.isActive ? '0px' : '50%')};
     transition:all .3s;
 `;
 
