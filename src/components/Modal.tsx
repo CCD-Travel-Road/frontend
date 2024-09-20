@@ -56,21 +56,19 @@ const customModalStyles: ReactModal.Styles = {
         left: 0,
     },
     content: {
-        width: "90%",
-        height: "40%",
+        width: "calc(100% - 40px)",
         zIndex: 150,
         position: "absolute",
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        borderRadius: "10px",
-        boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.25)",
+        borderRadius: "8px",
         backgroundColor: "white",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        overflow: "auto",
-        padding: "5%",
+        padding: "20px",
+        height:"fit-content",
     },
 };
 
@@ -79,60 +77,56 @@ const ModalContent = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
     align-items: center;
     justify-content: center;
 `;
 
 const Image = styled.img`
-    width: 80px;
+    width:100px;
     height: auto;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
 `;
 
 const TextContent = styled.div`
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 24px;
 `;
 
 const Title = styled.h2`
     font-size: 16px;
     font-weight: 600; /* Semi-bold */
     color: #333333;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 `;
 
 const Subtitle = styled.p`
     font-size: 14px;
     color: #888888;
-    margin-bottom: 10px;
 `;
 
 const ButtonContainer = styled.div`
     display: flex;
-    gap: 7px;
+    gap: 8px;
     width: 100%;
     justify-content: space-between;
 `;
 
 const ButtonLeft = styled.button`
     width: 50%;
-    padding: 10px;
+    padding: 12px 0px;
     border-radius: 8px;
     background-color: #E7E7E7;
     color: #333333;
     border: none;
-    cursor: pointer;
-    font-size: 14px;
+    font-size: 12px;
 `;
 
 const ButtonRight = styled.button`
     width: 50%;
-    padding: 10px;
+    padding: 12px 0px;
     border-radius: 8px;
     background-color: #2958DB;
     color: #FFFFFF;
     border: none;
-    cursor: pointer;
-    font-size: 14px;
+    font-size: 12px;
 `;
