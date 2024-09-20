@@ -10,7 +10,10 @@ import ViewJourney from './pages/ViewJourneyPage/ViewJourney';
 
 import Community from './pages/CommunityPage/Community'
 
+// login
 import LoginPage from './pages/LoginPage/LoginPage';
+import UserLogin from './pages/LoginPage/UserLogin';
+import UserRegister from './pages/LoginPage/UserRegister';
 
 function App() {
   return (
@@ -18,6 +21,10 @@ function App() {
       <GlobalStyles />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/userLogin" element={<UserLogin />} />
+        <Route path="/userRegister" element={<UserRegister />} />
+
+
         <Route path="/map" element={<MapPage />} />
         <Route path="/" element={<MainPage />} />
         <Route path="/setDate" element={<ASetDate />} />
