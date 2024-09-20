@@ -11,8 +11,6 @@ import { dateRangeState } from '../recoil/atoms'
 import { colors } from '../styles/GlobalStyles';
 import Modal from './Modal';
 
-import FuncButton from './Button/FuncButton';
-
 function ScrollableCalendar() {
     const [selectionRange, setSelectionRange] = useState({
         startDate: new Date(),
@@ -73,7 +71,7 @@ function ScrollableCalendar() {
             {isButtonVisible && (  
                 
                 <ButtonFrame onClick={handleNextButtonClick }>
-                    <FuncButton text="다음으로"/>
+                    <NextButton>다음으로</NextButton>
                 </ButtonFrame>
                 
             )}
@@ -174,18 +172,25 @@ const StyledDateRangePicker = styled(DateRangePicker)`
 `;
 
 const ButtonFrame = styled.button`
-    /* position: fixed;
-    width: 80%;
-    bottom: 20%;
+    position: fixed;
+    width: calc(100% - 40px);
+    bottom: 16%;
     left: 50%;
     transform: translateX(-50%);
-    padding: 10px 20px;
     background-color: ${colors.mainColor};
-    color: white;
+    
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 16px;
-    z-index: 10; */
-    width:100%;
+
+    font-weight:400;
+    color: white;
+    font-size: 14px;
+    padding:12px 0px;
+
+    z-index: 10;
 `;
+
+const NextButton = styled.div`
+    width:100%;
+`
