@@ -64,11 +64,11 @@ function ViewItem(props) {
 }
 
 ViewItem.propTypes = {
-    post: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      cost:PropTypes.string.isRequired,
-      date:PropTypes.string.isRequired,
-    }))
+    post: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        cost: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+    }).isRequired,
 };
 
 export default ViewItem;
