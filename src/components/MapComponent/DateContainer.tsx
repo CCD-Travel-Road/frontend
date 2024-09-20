@@ -82,7 +82,7 @@ export default DateContainer;
 
 // styled-components
 const Container = styled.div`
-    padding: 16px;
+    padding: 16px 20px;
     background-color: #fff;
     display: flex;
     flex-direction: column;
@@ -94,15 +94,14 @@ const DateRange = styled.p`
     font-family: 'Pretendard', sans-serif;
     font-size: 14px;
     color: #333;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 `;
 
 const SelectedDate = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 8px;
-    gap: 10px;
+    gap: 8px;
 `;
 
 const DayText = styled.p`
@@ -135,22 +134,24 @@ const DropdownButton = styled.button`
 `;
 
 const DropdownMenu = styled.div`
-    border: 1px solid #ddd;
     background: white;
     width: 100%;
     height: auto;
-    max-height: 100px;
+    max-height: 120px;
     overflow-y: auto;
     position: absolute;
     top: 100%;
     left: 0;
-    padding: 10px 0;
+
+    box-shadow:0px 4px 4px 0px rgba(0, 0, 0, 0.04);
+    border-radius: 0px 0px 8px 8px;
 `;
 
 const DateOption = styled.div`
-    padding: 8px;
+    padding: 16px;
     font-weight: 500;
     font-size: 14px;
+    
     cursor: pointer;
     &:hover {
         background: #f0f0f0;
@@ -159,6 +160,7 @@ const DateOption = styled.div`
 
 const Divider = styled.div`
     height: 1px;
+    width:calc(100% - 40px);
+    margin:0 auto;
     background-color: #e7e7e7;
-    margin: 5px 0;
 `;

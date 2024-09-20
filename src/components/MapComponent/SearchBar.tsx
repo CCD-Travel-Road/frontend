@@ -56,13 +56,15 @@ const SearchBarContainer = styled.div`
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    border: 1px solid ${colors.mainColor};
-    border-radius: 8px;
-    padding: 8px 12px;
-    background-color: #fff;
-    width: 90%;
+    
+    width:calc(100% - 40px);
+    display:flex;
+    align-items:center;
+    background-color:white;
+    border:1px solid var(--brandColor);
+    border-radius:50px;
+
+    padding:12px 16px;
     z-index: 10;
 `;
 
