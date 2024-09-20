@@ -90,6 +90,7 @@ export const TextInputFrame = styled.div`
     width: 100%;
 
     padding:0px 20px;
+    display:flex;
     align-items: center;
     justify-content:space-between;
     gap:16px;
@@ -106,14 +107,22 @@ export const TextInput = styled.input`
 
     font-size:14px;
     color:#333;
+
+    &:focus {
+        outline:none;
+    }
 `;
 
 export const SendButton = styled.div`
-    background-color:var(--brandColor);
+    display:flex;
+    align-items:center;
+    justify-content: center;
     padding:12px;
+    background-color:var(--brandColor);
     border-radius:8px;
 `;
 
 export const SendImage = styled.img`
     width:20px;
+    height: 20px;
 `;
