@@ -8,6 +8,8 @@ import CancleText from "src/components/CancleText";
 import QestionTitle from "./CreateJourneyCompnent/QestionTItle";
 import AnswerButton from "./CreateJourneyCompnent/AnswerButton";
 
+import sendButton from '../../images/send.png'
+
 import * as T from './BStyles';
 
 function BSetType() {
@@ -53,47 +55,49 @@ function BSetType() {
                             <T.ActiveBar isActive={activeTab === "선택형"} />
                         </T.TapMenu>
 
-                        <T.ContentFrame>
-                            <QestionTitle content="🤔 누구랑 가시나요?" />
-                            <T.AnswerFrame>
-                                {["친구", "가족", "회사동료", "지인", "기타", "구분이 애매해요"].map((answer) => (
-                                    <AnswerButton
-                                        key={answer}
-                                        contents={answer}
-                                        isActive={activeAnswerForWho === answer}
-                                        onClick={() => setActiveAnswerForWho(answer)}
-                                    />
-                                ))}
-                            </T.AnswerFrame>
-                        </T.ContentFrame>
+                        <T.ContentContainer>
+                            <T.ContentFrame>
+                                <QestionTitle content="🤔 누구랑 가시나요?" />
+                                <T.AnswerFrame>
+                                    {["친구", "가족", "회사동료", "지인", "기타", "구분이 애매해요"].map((answer) => (
+                                        <AnswerButton
+                                            key={answer}
+                                            contents={answer}
+                                            isActive={activeAnswerForWho === answer}
+                                            onClick={() => setActiveAnswerForWho(answer)}
+                                        />
+                                    ))}
+                                </T.AnswerFrame>
+                            </T.ContentFrame>
 
-                        <T.ContentFrame>
-                            <QestionTitle content="🤔 예산은 얼마정도 생각중이세요?" />
-                            <T.AnswerFrame>
-                                {["상관없음", "통크고 거하게!", "소소하게..", "쓰는대로 쓸거에요", "직접 고르고 싶어요!"].map((answer) => (
-                                    <AnswerButton
-                                        key={answer}
-                                        contents={answer}
-                                        isActive={activeAnswerBudget === answer}
-                                        onClick={() => setActiveAnswerBudget(answer)}
-                                    />
-                                ))}
-                            </T.AnswerFrame>
-                        </T.ContentFrame>
+                            <T.ContentFrame>
+                                <QestionTitle content="🤔 예산은 얼마정도 생각중이세요?" />
+                                <T.AnswerFrame>
+                                    {["상관없음", "통크고 거하게!", "소소하게..", "쓰는대로 쓸거에요", "직접 고르고 싶어요!"].map((answer) => (
+                                        <AnswerButton
+                                            key={answer}
+                                            contents={answer}
+                                            isActive={activeAnswerBudget === answer}
+                                            onClick={() => setActiveAnswerBudget(answer)}
+                                        />
+                                    ))}
+                                </T.AnswerFrame>
+                            </T.ContentFrame>
 
-                        <T.ContentFrame>
-                            <QestionTitle content="🤔 여행의 목적이 뭐에요?" />
-                            <T.AnswerFrame>
-                                {["힐링", "재미", "액티비티", "그냥", "맛집 탐방", "우정", "사랑", "휴식"].map((answer) => (
-                                    <AnswerButton
-                                        key={answer}
-                                        contents={answer}
-                                        isActive={activeAnswerPurpose === answer}
-                                        onClick={() => setActiveAnswerPurpose(answer)}
-                                    />
-                                ))}
-                            </T.AnswerFrame>
-                        </T.ContentFrame>
+                            <T.ContentFrame>
+                                <QestionTitle content="🤔 여행의 목적이 뭐에요?" />
+                                <T.AnswerFrame>
+                                    {["힐링", "재미", "액티비티", "그냥", "맛집 탐방", "우정", "사랑", "휴식"].map((answer) => (
+                                        <AnswerButton
+                                            key={answer}
+                                            contents={answer}
+                                            isActive={activeAnswerPurpose === answer}
+                                            onClick={() => setActiveAnswerPurpose(answer)}
+                                        />
+                                    ))}
+                                </T.AnswerFrame>
+                            </T.ContentFrame>
+                        </T.ContentContainer>
                         <Navigation />
                     </T.EntireContainer>
 
@@ -114,6 +118,12 @@ function BSetType() {
                             <T.ActiveBar isActive={activeTab === "선택형"} />
                         </T.TapMenu>
 
+                        <T.TextInputFrame>
+                            <T.TextInput placeholder="내용을 입력하세요." />
+                            <T.SendButton>
+                                <T.SendImage src={sendButton} />
+                            </T.SendButton>
+                        </T.TextInputFrame>
                         <Navigation />
                     </T.EntireContainer>
             }

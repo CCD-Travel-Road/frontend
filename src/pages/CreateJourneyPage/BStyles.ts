@@ -46,6 +46,12 @@ export const ActiveBar = styled.div<TapMenuItemProps>`
 `;
 
 // Content
+export const ContentContainer = styled.div`
+    width:100%;
+    margin-bottom:102.5px;
+    overflow:scroll;
+`
+
 export const ContentFrame = styled.div`
     width: 100%;
     height: 100%; 
@@ -54,8 +60,12 @@ export const ContentFrame = styled.div`
     
     overflow-y: auto;
 
-    &:nth-child(3) {
-        padding:24px 20px 0px 20px;
+    &:first-child {
+        margin-top:24px;
+    }
+
+    &:last-child {
+        margin-bottom:20px;
     }
 `;
 
@@ -70,4 +80,40 @@ export const SubTItle = styled.div`
 export const AnswerFrame = styled.div`
     display:flex;
     flex-wrap:wrap;
+`;
+
+// #############
+// 대화형
+// #############
+
+export const TextInputFrame = styled.div`
+    width: 100%;
+
+    padding:0px 20px;
+    align-items: center;
+    justify-content:space-between;
+    gap:16px;
+
+    position:absolute;
+    bottom:calc(102.5px + 20px);
+`;
+
+export const TextInput = styled.input`
+    width: 100%;
+    padding:12px 16px;
+    border:1px solid var(--brandColor);
+    border-radius: 8px;
+
+    font-size:14px;
+    color:#333;
+`;
+
+export const SendButton = styled.div`
+    background-color:var(--brandColor);
+    padding:12px;
+    border-radius:8px;
+`;
+
+export const SendImage = styled.img`
+    width:20px;
 `;
