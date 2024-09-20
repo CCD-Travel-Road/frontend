@@ -101,7 +101,7 @@ export const AgeGenderFrame = styled.div`
 
 export const AgeFrame = styled.div`
     width:48%;
-    margin-bottom:16px;
+    margin-bottom:24px;
 `
 
 export const AgeTitle = styled.p`
@@ -125,6 +125,7 @@ export const AgeInput = styled.input`
 
 export const GenderFrame = styled.div`
     width:48%;
+    margin-bottom:24px;
 `
 
 export const GenderTitle = styled.p`
@@ -152,6 +153,14 @@ export const GenderOption = styled.option`
 
 export const SubmitButton = styled.button`
     width:100%;
+    padding:12px;
+    background-color:var(--brandColor);
+    border-radius:8px;
+    border:none;
+
+    font-size: 14px;
+    font-weight:bold;
+    color:white;
 `
 
 // Absolute
