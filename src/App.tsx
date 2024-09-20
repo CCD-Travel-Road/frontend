@@ -8,7 +8,8 @@ import ASetDate from './pages/CreateJourneyPage/ADateSelectPage';
 import BSetType from './pages/CreateJourneyPage/BTypeSelectPage';
 import ViewJourney from './pages/ViewJourneyPage/ViewJourney';
 
-import Community from './pages/CommunityPage/Community'
+import Community from './pages/CommunityPage/Community';
+import Detail from './pages/PlaceDetailPage/PlaceDetailPage';
 
 // login
 import LoginPage from './pages/LoginPage/LoginPage';
@@ -31,6 +32,7 @@ function App() {
         <Route path="/setType" element={<BSetType />} />
         <Route path="/view" element={<ViewJourney />} />
         <Route path="/community" element={<Community />} />
+        <Route path="/details" element={<Detail />} />
       </Routes>
     </RecoilRoot>
   );

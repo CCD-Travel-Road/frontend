@@ -14,6 +14,8 @@ export const TitleFrame = styled.div`
 
 export const ContentFrame = styled.div`
     width: 100%;
-    height: 100%; 
+    height: 100%;
+    padding-top: 18%;
     overflow-y: auto;
+    background-color: #F9F9F9;
 `;

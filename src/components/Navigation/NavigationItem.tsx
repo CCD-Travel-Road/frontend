@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 // styled
 const Wrapper = styled.div<{ active: boolean }>`
     width:100%;
-    
     display:flex;
     flex-direction: column;
     align-items:center;

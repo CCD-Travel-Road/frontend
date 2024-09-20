@@ -68,12 +68,12 @@ function ScrollableCalendar() {
                 locale={ko}
                 color={colors.mainColor}
             />
-            {isButtonVisible && (  
-                
-                <ButtonFrame onClick={handleNextButtonClick }>
+            {isButtonVisible && (
+
+                <ButtonFrame onClick={handleNextButtonClick}>
                     <NextButton>다음으로</NextButton>
                 </ButtonFrame>
-                
+
             )}
             <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
         </CalendarWrapper>
