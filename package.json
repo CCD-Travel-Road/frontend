@@ -10,6 +10,7 @@
     "@types/node": "^17.0.45",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "axios": "^1.7.7",
     "date-fns": "^3.6.0",
     "eslint": "^9.6.0",
     "firebase": "^10.13.0",
@@ -52,9 +53,7 @@
     "lint:fix": "eslint 'src/**/*.{js,jsx,ts,tsx}' --fix",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
   },
-
   "proxy": "http://localhost:8080",
-  
   "eslintConfig": {
     "extends": [
       "react-app",

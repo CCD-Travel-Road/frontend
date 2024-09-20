@@ -24,11 +24,6 @@
   "theme_color": "#000000",
   "background_color": "#ffffff",
   "iarc_rating_id": "YOUR_IARC_ID",
-  "display_override": [
-  "window-controls-overlay",
-  "standalone",
-  "browser"
-],
   "related_applications": [
     {
       "platform": "play",

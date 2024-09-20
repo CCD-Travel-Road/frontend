@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import * as T from './UserRegisterStyles';
 
 function UserRegister() {
@@ -19,24 +20,15 @@ function UserRegister() {
             gender
         };
 
-        try {
-            const response = await fetch('http://localhost:8080/api/public/users/create', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
+        const signupUrl = `${process.env.REACT_APP_API_URL}/api/public/users/create`;
 
-            const data = await response.json();
-            if (response.ok) {
-                console.log('User registered:', data);
-                navigate('/login');
-            } else {
-                console.error('Error:', data);
-            }
+        try {
+            const response = await axios.post(signupUrl, formData);
+            console.log('User registered:', response.data);
+            navigate('/login');
         } catch (error) {
-            console.error('Network error:', error);
+            console.error('회원가입 실패:', error);
+            alert('회원가입에 실패했습니다. 다시 시도해주세요.');
         }
     };
 
@@ -49,7 +41,7 @@ function UserRegister() {
             <T.FormFrame onSubmit={handleSubmit} as="form">
                 <T.EmailFrame>
                     <T.EmailTitle>이메일</T.EmailTitle>
-                    <T.EmailInput 
+                    <T.EmailInput
                         placeholder='이메일을 입력해주세요.'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -59,7 +51,7 @@ function UserRegister() {
 
                 <T.PasswordFrame>
                     <T.PasswordTitle>비밀번호</T.PasswordTitle>
-                    <T.PasswordInput 
+                    <T.PasswordInput
                         type="password"
                         placeholder='비밀번호를 입력해주세요.'
                         value={password}
@@ -70,7 +62,7 @@ function UserRegister() {
                 <T.AgeGenderFrame>
                     <T.AgeFrame>
                         <T.AgeTitle>나이</T.AgeTitle>
-                        <T.AgeInput 
+                        <T.AgeInput
                             type="number"
                             placeholder='나이를 입력해주세요.'
                             value={age}
@@ -80,7 +72,7 @@ function UserRegister() {
 
                     <T.GenderFrame>
                         <T.GenderTitle>성별</T.GenderTitle>
-                        <T.GenderSelect 
+                        <T.GenderSelect
                             value={gender}
                             onChange={(e) => setGender(e.target.value)}
                         >
