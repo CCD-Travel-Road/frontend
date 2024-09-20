@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useEffect, useState, useCallback } from "react";
+import { useRecoilState } from "recoil";
+import { useNavigate } from "react-router-dom";
 import { createRoot } from 'react-dom/client';
 import styled from 'styled-components';
-import { selectedLocationState, searchedLocationState } from "../../recoil/atoms";
+import { selectedPlaceState } from "../../recoil/atoms";
 import InfoBox from "./InfoBox";
 
 interface MapContainerProps {
@@ -17,14 +18,27 @@ const MapContainer = styled.div<MapContainerProps>`
 `;
 
 function MapBox() {
-    const [, setLocation] = useRecoilState(selectedLocationState);
-    const [, setPlaceInfo] = useState<{ name: string; address: string; button: boolean } | null>(null);
-    const searchedLocation = useRecoilValue(searchedLocationState);
-    const [map, setMap] = useState(null);
-    const [marker, setMarker] = useState(null);
-    const [customOverlay, setCustomOverlay] = useState(null);
+    const [, setPlaceInfo] = useState<{ placeName: string; lat: number; lng: number; placeAddress: string } | null>(null);
+    const [selectedPlace, setSelectedPlace] = useRecoilState(selectedPlaceState);
+    const [disableClicks, setDisableClicks] = useState(false);
+    const navigate = useNavigate();
+    const [searchedLocation,] = useState<{ lat: number; lng: number; placeName: string } | null>(null);
+    const [map,] = useState(null);
+    const [marker,] = useState(null);
+    const [customOverlay,] = useState(null);
     const [initialLoad, setInitialLoad] = useState(true);
-    const [disableClicks,] = useState(false); // 사용되지 않는 상태 변수
+
+    const handleInfoBoxOpen = () => setDisableClicks(true);
+    const handleInfoBoxClose = () => setDisableClicks(false);
+
+    const handleDetailsClick = useCallback(() => {
+        console.log("Navigating to /details with selectedPlace:", selectedPlace);
+        if (selectedPlace && selectedPlace.placeName) {
+            navigate("/details");
+        } else {
+            console.error("No place info available when navigating.");
+        }
+    }, [selectedPlace, navigate]);
 
     useEffect(() => {
         const initializeMap = () => {
@@ -37,24 +51,11 @@ function MapBox() {
                     };
 
                     const newMap = new window.kakao.maps.Map(container, mapOptions);
-                    setMap(newMap);
-
-                    const newMarker = new window.kakao.maps.Marker({
-                        position: new window.kakao.maps.LatLng(0, 0),
-                        map: null,
-                    });
-                    setMarker(newMarker);
-
-                    const newCustomOverlay = new window.kakao.maps.CustomOverlay({
-                        position: new window.kakao.maps.LatLng(0, 0),
-                        content: '',
-                        yAnchor: 1,
-                        map: null,
-                    });
-                    setCustomOverlay(newCustomOverlay);
+                    const newMarker = new window.kakao.maps.Marker({ position: new window.kakao.maps.LatLng(0, 0), map: null });
+                    const newCustomOverlay = new window.kakao.maps.CustomOverlay({ position: new window.kakao.maps.LatLng(0, 0), content: '', yAnchor: 1, map: null });
 
                     window.kakao.maps.event.addListener(newMap, 'click', (mouseEvent) => {
-                        if (disableClicks) return;  // 클릭 비활성화 상태일 때 이벤트 차단
+                        if (disableClicks) return;
 
                         const latlng = mouseEvent.latLng;
                         newMarker.setPosition(latlng);
@@ -62,55 +63,59 @@ function MapBox() {
 
                         const geocoder = new window.kakao.maps.services.Geocoder();
                         geocoder.coord2Address(latlng.getLng(), latlng.getLat(), (result, addrStatus) => {
-                            if (addrStatus === window.kakao.maps.services.Status.OK) {
-                                if (result.length > 0) {
-                                    const roadAddress = result[0].road_address?.address_name || '';
-                                    const addressName = result[0].address?.address_name || '';
+                            if (addrStatus === window.kakao.maps.services.Status.OK && result.length > 0) {
+                                const roadAddress = result[0].road_address?.address_name || '';
+                                const addressName = result[0].address?.address_name || '';
 
-                                    const searchPlaces = () => {
-                                        const ps = new window.kakao.maps.services.Places();
-                                        const callback = (placesData, placeStatus) => {
-                                            if (placeStatus === window.kakao.maps.services.Status.OK) {
-                                                const firstPlace = placesData[0];
-                                                const placeNameFromSearch = firstPlace ? firstPlace.place_name : '';
+                                const searchPlaces = () => {
+                                    const ps = new window.kakao.maps.services.Places();
+                                    const callback = (placesData, placeStatus) => {
+                                        if (placeStatus === window.kakao.maps.services.Status.OK) {
+                                            const firstPlace = placesData[0];
+                                            const placeNameFromSearch = firstPlace ? firstPlace.place_name : '';
 
-                                                const updatedPlaceInfo = {
-                                                    name: placeNameFromSearch || addressName,
-                                                    address: roadAddress,
-                                                    button: true
-                                                };
-                                                setPlaceInfo(updatedPlaceInfo);
+                                            const updatedPlaceInfo = {
+                                                placeName: placeNameFromSearch || addressName,
+                                                lat: latlng.getLat(),
+                                                lng: latlng.getLng(),
+                                                placeAddress: roadAddress || addressName || '주소 없음',
+                                            };
 
-                                                const infoBoxContainer = document.createElement('div');
-                                                const root = createRoot(infoBoxContainer); // createRoot 사용
-                                                root.render(
-                                                    <InfoBox
-                                                        placeName={placeNameFromSearch || addressName}
-                                                        roadAddress={roadAddress}
-                                                        onAddClick={() => alert('장소가 추가되었습니다.')}
-                                                        onDetailsClick={() => alert('자세히 보기 클릭됨')}
-                                                    />
-                                                );
+                                            setPlaceInfo(updatedPlaceInfo);
+                                            setSelectedPlace(updatedPlaceInfo);
 
-                                                newCustomOverlay.setContent(infoBoxContainer);
-                                                newCustomOverlay.setContent(infoBoxContainer);
-                                                newCustomOverlay.setPosition(latlng);
-                                                newCustomOverlay.setMap(newMap);
-                                                newMap.setCenter(latlng);
-                                                setLocation({ lat: latlng.getLat(), lng: latlng.getLng() });
-                                            } else {
-                                                console.error("Place search failed.");
-                                            }
-                                        };
+                                            const infoBoxContainer = document.createElement('div');
+                                            const root = createRoot(infoBoxContainer);
+                                            root.render(
+                                                <InfoBox
+                                                    placeName={placeNameFromSearch || addressName}
+                                                    roadAddress={roadAddress}
+                                                    onAddClick={() => {
+                                                        handleInfoBoxOpen();
+                                                        alert('장소가 추가되었습니다.');
+                                                        handleInfoBoxClose();
+                                                    }}
+                                                    onDetailsClick={handleDetailsClick}
+                                                    onClose={handleInfoBoxClose}
+                                                />
+                                            );
 
-                                        ps.keywordSearch(addressName, callback, {
-                                            location: latlng,
-                                            radius: 100, // 검색 반경 (단위: 미터)
-                                        });
+                                            newCustomOverlay.setContent(infoBoxContainer);
+                                            newCustomOverlay.setPosition(latlng);
+                                            newCustomOverlay.setMap(newMap);
+                                            newMap.setCenter(latlng);
+                                        } else {
+                                            console.error("Place search failed.");
+                                        }
                                     };
 
-                                    searchPlaces();
-                                }
+                                    ps.keywordSearch(addressName, callback, {
+                                        location: latlng,
+                                        radius: 100,
+                                    });
+                                };
+
+                                searchPlaces();
                             } else {
                                 console.error("Address search failed.");
                             }
@@ -147,8 +152,7 @@ function MapBox() {
                 document.head.removeChild(script);
             }
         };
-    }, [disableClicks]);
-
+    }, [setSelectedPlace]);
     useEffect(() => {
         if (searchedLocation && map && marker && customOverlay) {
             const { lat, lng, placeName } = searchedLocation;
@@ -172,17 +176,20 @@ function MapBox() {
                     const roadAddressName = addressResult?.road_address?.address_name || '';
                     const landAddressName = addressResult?.address?.address_name || '';
 
-                    // 선택된 장소명과 주소 처리
                     const placeNameFromResult = placeName || defaultPlaceName;
                     const addressToDisplay = roadAddressName || landAddressName || '주소 없음';
                     const infoBoxContainer = document.createElement('div');
-                    const root = createRoot(infoBoxContainer); // createRoot 사용
+                    const root = createRoot(infoBoxContainer);
                     root.render(
                         <InfoBox
                             placeName={placeNameFromResult}
                             roadAddress={addressToDisplay}
-                            onAddClick={() => alert('장소가 추가되었습니다.')}
+                            onAddClick={() => {
+                                handleInfoBoxOpen();
+                                alert('장소가 추가되었습니다.');
+                            }}
                             onDetailsClick={() => alert('자세히 보기 클릭됨')}
+                            onClose={handleInfoBoxClose}
                         />
                     );
 
@@ -191,14 +198,13 @@ function MapBox() {
                         customOverlay.setPosition(latlng);
                         customOverlay.setMap(map);
                         map.setCenter(latlng);
-                        setLocation({ lat, lng });
                     }
                 } else {
                     console.error("Address search for searched location failed.");
                 }
             });
         }
-    }, [searchedLocation, map, marker, customOverlay]);
+    }, [searchedLocation, map, marker, customOverlay, initialLoad]);
 
     return (
         <MapContainer disableClicks={disableClicks}>

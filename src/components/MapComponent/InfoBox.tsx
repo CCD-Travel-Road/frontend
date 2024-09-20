@@ -5,35 +5,38 @@ interface InfoBoxProps {
     roadAddress?: string;
     onAddClick: () => void;
     onDetailsClick: () => void;
+    onClose: () => void;
 }
 
-const InfoBox = ({ placeName, roadAddress, onAddClick, onDetailsClick }: InfoBoxProps) => (
-    <InfoBoxContainer hasRoadAddress={!!roadAddress}>
-        <div style={{ flex: 1 }}>
-            <Title>{placeName}</Title>
-            {roadAddress && <Address>{roadAddress}</Address>}
-        </div>
-        {roadAddress && <Divider />}
-        <ButtonContainer>
-            <Button isPrimary onClick={onAddClick}>
-                추가하기
-            </Button>
-            <Button isPrimary={false} onClick={onDetailsClick}>
-                자세히 보기
-            </Button>
-        </ButtonContainer>
-    </InfoBoxContainer>
-);
+
+function InfoBox({ placeName, roadAddress, onAddClick, onDetailsClick, onClose }: InfoBoxProps) {
+    return (
+        <InfoBoxContainer hasRoadAddress={!!roadAddress}>
+            <CloseButton onClick={onClose}>×</CloseButton>
+            <div style={{ flex: 1 }}>
+                <Title>{placeName}</Title>
+                {roadAddress && <Address>{roadAddress}</Address>}
+            </div>
+            {roadAddress && <Divider />}
+            <ButtonContainer>
+                <Button isPrimary onClick={onAddClick}>
+                    추가하기
+                </Button>
+                <Button isPrimary={false} onClick={onDetailsClick}>
+                    자세히 보기
+                </Button>
+            </ButtonContainer>
+        </InfoBoxContainer>
+    );
+}
 
 export default InfoBox;
 
-
 const InfoBoxContainer = styled.div<{ hasRoadAddress?: boolean }>`
-    font-family: 'Pretendard';
     font-size: 14px;
     color: #333;
     width: 250px;
-    height: ${({ hasRoadAddress }) => (hasRoadAddress ? '130px' : '100px')};
+    min-height: ${({ hasRoadAddress }) => (hasRoadAddress ? '130px' : '100px')};
     padding: 10px;
     background-color: #fff;
     border-radius: 8px;
@@ -42,13 +45,28 @@ const InfoBoxContainer = styled.div<{ hasRoadAddress?: boolean }>`
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    top: -140px; 
+    top: -140px;
     left: -125px;
+    cursor: default;
+    z-index: 1000;
+`;
+
+const CloseButton = styled.button`
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #666;
+    cursor: pointer;
+    &:hover {
+        color: #000; // hover 시 색상 변경
+    }
 `;
 
 const Title = styled.h2`
     margin: 5px;
-    font-family: 'Pretendard';
     font-size: 16px;
     color: #333;
 `;
@@ -79,4 +97,7 @@ const Button = styled.button<{ isPrimary: boolean }>`
     border-radius: 8px;
     cursor: pointer;
     flex: 1;
+    &:hover {
+        opacity: 0.9;
+    }
 `;

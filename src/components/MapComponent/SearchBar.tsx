@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { searchedLocationState } from 'src/recoil/atoms';
+import { selectedPlaceState } from 'src/recoil/atoms'; // 통일된 상태로 변경
 import { CiSearch } from 'react-icons/ci';
 import styled from 'styled-components';
 import { colors } from '../../styles/GlobalStyles';
 
 function SearchBar() {
     const [searchTerm, setSearchTerm] = useState('');
-    const [, setSearchedLocation] = useRecoilState(searchedLocationState);
+    const [, setSelectedPlace] = useRecoilState(selectedPlaceState); // selectedPlaceState로 상태 설정
 
     const handleSearch = () => {
         const ps = new window.kakao.maps.services.Places();
@@ -15,13 +15,18 @@ function SearchBar() {
             if (status === window.kakao.maps.services.Status.OK && data.length > 0) {
                 const firstPlace = data[0];
                 const latlng = new window.kakao.maps.LatLng(firstPlace.y, firstPlace.x);
-                setSearchedLocation({
+
+                // selectedPlaceState를 업데이트
+                setSelectedPlace({
+                    placeName: firstPlace.place_name,
                     lat: latlng.getLat(),
                     lng: latlng.getLng(),
-                    placeName: firstPlace.place_name,
-                    roadAddress: firstPlace.road_address?.address_name || '',
+                    placeAddress: firstPlace.road_address?.address_name || '',
                 });
-                setSearchTerm('');
+
+                setSearchTerm(''); // 검색 후 입력창 초기화
+            } else {
+                alert("검색 결과가 없습니다.");
             }
         });
     };
@@ -47,7 +52,7 @@ function SearchBar() {
 export default SearchBar;
 
 const SearchBarContainer = styled.div`
-    position: absolute; /* Absolute positioning to overlay */
+    position: absolute;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);

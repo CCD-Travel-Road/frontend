@@ -8,7 +8,8 @@ import ASetDate from './pages/CreateJourneyPage/ASetDate';
 
 import ViewJourney from './pages/ViewJourneyPage/ViewJourney';
 
-import Community from './pages/CommunityPage/Community'
+import Community from './pages/CommunityPage/Community';
+import Detail from './pages/PlaceDetailPage/PlaceDetailPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/setDate" element={<ASetDate />} />
         <Route path="/view" element={<ViewJourney />} />
         <Route path="/community" element={<Community />} />
+        <Route path="/details" element={<Detail />} />
       </Routes>
     </RecoilRoot>
   );
