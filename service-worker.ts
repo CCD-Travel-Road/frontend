@@ -1,5 +1,8 @@
 /// <reference lib="webworker" />
 /* eslint-disable no-restricted-globals */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable prefer-regex-literals */
+
 
 import { clientsClaim } from 'workbox-core';
 import { ExpirationPlugin } from 'workbox-expiration';
